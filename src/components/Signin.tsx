@@ -9,10 +9,12 @@ import {
   Checkbox,
   Stack,
   Button,
+  Link,
   Heading,
   Text,
   useColorModeValue,
 } from '@chakra-ui/react'
+import * as rrd from "react-router-dom"
 
 export default function SignIn() {
   return (
@@ -24,9 +26,13 @@ export default function SignIn() {
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'}>Sign in to your account</Heading>
-          <Text fontSize={'lg'} color={'gray.600'}>
-            to enjoy all of our cool <Text color={'blue.400'}>features</Text> ✌️
-          </Text>
+          <Box fontSize={'lg'} display={"flex"} alignItems={"center"} justifyContent={"center"}>
+            <Text color={'gray.600'} >
+              to enjoy all of our cool
+            </Text>
+            <Text color={'teal.400'} px={2}>features</Text>
+            <Text>✌️</Text>
+          </Box>
         </Stack>
         <Box
           rounded={'lg'}
@@ -48,16 +54,23 @@ export default function SignIn() {
                 align={'start'}
                 justify={'space-between'}>
                 <Checkbox>Remember me</Checkbox>
-                <Text color={'blue.400'}>Forgot password?</Text>
+                <Text color={'teal.400'}>Forgot password?</Text>
               </Stack>
               <Button
-                bg={'blue.400'}
+                bg={'teal.400'}
                 color={'white'}
                 _hover={{
-                  bg: 'blue.500',
+                  bg: 'teal.500',
                 }}>
                 Sign in
               </Button>
+              <Stack pt={6}>
+              <rrd.Link to={"/signup"}>
+                <Text align={'center'}>
+                  New user? <Link color={'teal.400'}>Sign Up</Link>
+                </Text>
+              </rrd.Link>
+            </Stack>
             </Stack>
           </Stack>
         </Box>
