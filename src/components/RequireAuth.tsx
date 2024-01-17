@@ -12,7 +12,7 @@ export const RequireAuth = () => {
         useEffect(() => {
             toast({
                 title: 'User Not Logged In',
-                description: "We cannot log you in. Sign in to continue",
+                description: "Sorry, We cannot log you in. Sign in to continue",
                 status: 'error',
                 isClosable: true,
             })

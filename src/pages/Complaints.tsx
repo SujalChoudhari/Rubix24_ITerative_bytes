@@ -9,22 +9,60 @@ import {
   Textarea,
   VStack,
 } from '@chakra-ui/react';
+import PocketBase from 'pocketbase';
+import { useNavigate } from 'react-router';
+import { usePocket } from '../contexts/PocketContext';
+const pb = new PocketBase('http://127.0.0.1:8090');
+
 
 const Complaints = () => {
+  const { user } = usePocket();
+
   const [formData, setFormData] = useState({
     orderId: '',
     orderOptions: ['Order #1', 'Order #2', 'Order #3'],
+    complaintOptions: ['Dilevery Boy', 'Food Quality', 'Wrong Dilevery'],
     selectedOrder: '',
+    selectedComplaint: '',
     address: '',
     desc: '',
   });
 
+  const navigate = useNavigate();
+
+  const data = {
+    "username": user.name,
+    "description": formData.desc,
+    "status": "Processing Started",
+    "address": formData.address,
+    "orderId": formData.selectedOrder,
+    "complaintType": formData.selectedComplaint
+  };
+
   const handleSubmit = () => {
     console.log('Form submitted:', formData);
+    const saveToDB = async () => {
+      const record = await pb.collection('complaints').create(data);
+    }
+    saveToDB()
+
+    setFormData({
+      orderId: '',
+      orderOptions: ['Order #1', 'Order #2', 'Order #3'],
+      complaintOptions: ['Dilevery Boy', 'Food Quality', 'Wrong Dilevery'],
+      selectedOrder: '',
+      selectedComplaint: '',
+      address: '',
+      desc: '',
+    })
   };
 
   const handleOrderChange = (e) => {
     setFormData({ ...formData, selectedOrder: e.target.value });
+  };
+
+  const handleComplaintChange = (e) => {
+    setFormData({ ...formData, selectedComplaint: e.target.value });
   };
 
   const handleAddressChange = (e) => {
@@ -56,6 +94,21 @@ const Complaints = () => {
           </FormControl>
 
           <FormControl>
+            <FormLabel>Complaint Type</FormLabel>
+            <Select
+              placeholder="Select Complaint Type"
+              value={formData.selectedComplaint}
+              onChange={handleComplaintChange}
+            >
+              {formData.complaintOptions.map((order, index) => (
+                <option key={index} value={order}>
+                  {order}
+                </option>
+              ))}
+            </Select>
+          </FormControl>
+
+          <FormControl>
             <FormLabel>Address</FormLabel>
             <Textarea
               placeholder="Enter your address"
@@ -73,7 +126,7 @@ const Complaints = () => {
             ></iframe>
 
           </FormControl>
-          
+
           <FormControl>
             <FormLabel>Complaint Description</FormLabel>
             <Textarea
@@ -88,6 +141,7 @@ const Complaints = () => {
           </Button>
         </VStack>
       </Box>
+
     </ChakraProvider>
   );
 };

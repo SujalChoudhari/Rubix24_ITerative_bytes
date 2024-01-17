@@ -3,7 +3,7 @@ import Homepage from './pages/Homepage';
 import Complaints from './pages/Complaints';
 import Orders from './pages/Orders';
 import Inventory from './pages/Inventory';
-import TrackOrders from './pages/TrackOrders';
+import TractComplaints from './pages/TrackComplaints';
 import SignUp from './components/Signup';
 import SignIn from './components/Signin';
 import VideoCall from './pages/VideoCall';
@@ -26,7 +26,7 @@ const RoutesConfig = () => {
           {/* <Route path="/protected" element={<Protected />} /> */}
           <Route path="/orders" element={<Orders />} />
           <Route path="/inventory" element={<Inventory />} />
-          <Route path="/track" element={<TrackOrders />} />
+          <Route path="/track" element={<TractComplaints />} />
           <Route path="/complaints" element={<Complaints />} />
           <Route path="/videoCall" element={<VideoCall />} />
           <Route path="/room/:roomId" element={<RoomPage />} />

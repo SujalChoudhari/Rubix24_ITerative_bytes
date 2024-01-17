@@ -3,7 +3,7 @@ import { Box, Flex, VStack, Text, Button, List, ListItem, Divider } from '@chakr
 import SupportMeetingCard from '../SupportMeetingCard';
 import PocketBase from 'pocketbase';
 
-function AdminPanel() {
+function SupportChatRoom() {
     // Sample list of Meet codes
     const [meetCodes, setMeetCodes] = useState([])
     const pb = new PocketBase('http://127.0.0.1:8090');
@@ -64,4 +64,4 @@ function AdminPanel() {
     );
 }
 
-export default AdminPanel;
+export default SupportChatRoom;

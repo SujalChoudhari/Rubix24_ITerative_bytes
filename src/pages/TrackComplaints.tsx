@@ -1,9 +1,9 @@
 import React from 'react'
 
-const TrackOrders = () => {
+const TractComplaints = () => {
   return (
     <div>TrackOrders</div>
   )
 }
 
-export default TrackOrders
+export default TractComplaints
