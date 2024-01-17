@@ -269,6 +269,10 @@ const NAV_ITEMS: Array<NavItem> = [
     href: '/track',
   },
   {
+    label: 'Community',
+    href: '/community',
+  },
+  {
     label: 'Support',
     href: '/videocall',
   },

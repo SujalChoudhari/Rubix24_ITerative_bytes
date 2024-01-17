@@ -14,6 +14,7 @@ import { Protected } from "./pages/Protected";
 import { RequireAuth } from "./components/RequireAuth";
 
 import { PocketProvider } from "./contexts/PocketContext";
+import CommunityPage from './pages/CommunityPage';
 const RoutesConfig = () => {
   return (
     <PocketProvider>
@@ -28,6 +29,7 @@ const RoutesConfig = () => {
           <Route path="/inventory" element={<Inventory />} />
           <Route path="/track" element={<TractComplaints />} />
           <Route path="/complaints" element={<Complaints />} />
+          <Route path="/community" element={<CommunityPage />} />
           <Route path="/videoCall" element={<VideoCall />} />
           <Route path="/room/:roomId" element={<RoomPage />} />
 
