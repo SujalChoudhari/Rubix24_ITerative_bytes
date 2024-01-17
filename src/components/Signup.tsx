@@ -16,12 +16,30 @@ import {
   Link,
   useColorModeValue,
 } from '@chakra-ui/react'
+import React, { useCallback, useRef } from "react";
+
+import { usePocket } from "../contexts/PocketContext";
 import { useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import * as rrd from 'react-router-dom'
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false)
+
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const nameRef = useRef();
+  const { register } = usePocket();
+  const navigate = rrd.useNavigate();
+
+  const handleOnSubmit = useCallback(
+    async (evt) => {
+      evt?.preventDefault();
+      await register(emailRef.current.value, passwordRef.current.value, nameRef.current.value);
+      navigate("/signin");
+    },
+    [register]
+  );
 
   return (
     <Flex
@@ -48,7 +66,7 @@ export default function SignUp() {
               <Box>
                 <FormControl id="firstName" isRequired>
                   <FormLabel>First Name</FormLabel>
-                  <Input type="text" />
+                  <Input type="text" ref={nameRef} />
                 </FormControl>
               </Box>
               <Box>
@@ -60,12 +78,12 @@ export default function SignUp() {
             </HStack>
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input type="email" ref={emailRef} />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? 'text' : 'password'} />
+                <Input type={showPassword ? 'text' : 'password'} ref={passwordRef} />
                 <InputRightElement h={'full'}>
                   <Button
                     variant={'ghost'}
@@ -77,6 +95,7 @@ export default function SignUp() {
             </FormControl>
             <Stack spacing={10} pt={2}>
               <Button
+                onClick={handleOnSubmit}
                 loadingText="Submitting"
                 size="lg"
                 bg={'teal.400'}

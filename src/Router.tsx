@@ -9,21 +9,32 @@ import SignIn from './components/Signin';
 import VideoCall from './pages/VideoCall';
 import RoomPage from './pages/RoomPage';
 import Admin from './pages/Admin';
+
+import { Protected } from "./pages/Protected";
+import { RequireAuth } from "./components/RequireAuth";
+
+import { PocketProvider } from "./contexts/PocketContext";
 const RoutesConfig = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Homepage />} />
-      <Route path="/orders" element={<Orders />} />
-      <Route path="/inventory" element={<Inventory />} />
-      <Route path="/track" element={<TrackOrders />} />
-      <Route path="/complaints" element={<Complaints />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/signin" element={<SignIn />} />
-      <Route path="/videoCall" element={<VideoCall />} />
-      <Route path="/room/:roomId" element={<RoomPage />} />
+    <PocketProvider>
+      <Routes>
+        {/* <Route index element={<SignUp />} /> */}
+        <Route path="/" element={<Homepage />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route element={<RequireAuth />}>
+          {/* <Route path="/protected" element={<Protected />} /> */}
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/inventory" element={<Inventory />} />
+          <Route path="/track" element={<TrackOrders />} />
+          <Route path="/complaints" element={<Complaints />} />
+          <Route path="/videoCall" element={<VideoCall />} />
+          <Route path="/room/:roomId" element={<RoomPage />} />
 
-      <Route path="/admin" element={<Admin />} />
-    </Routes>
+          <Route path="/admin" element={<Admin />} />
+        </Route>
+      </Routes>
+    </PocketProvider>
   );
 };
 

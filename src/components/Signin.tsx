@@ -15,8 +15,24 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import * as rrd from "react-router-dom"
+import React, { useRef, useCallback } from "react";
+
+import { usePocket } from "../contexts/PocketContext";
 
 export default function SignIn() {
+
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const { login } = usePocket();
+  const navigate = rrd.useNavigate();
+
+  const handleOnSubmit = useCallback(
+    async () => {
+      await login(emailRef.current.value, passwordRef.current.value);
+      navigate("/");
+    },
+    [login]
+  );
   return (
     <Flex
       minH={'100vh'}
@@ -42,11 +58,11 @@ export default function SignIn() {
           <Stack spacing={4}>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input type="email" ref={emailRef} />
             </FormControl>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
-              <Input type="password" />
+              <Input type="password" ref={passwordRef} />
             </FormControl>
             <Stack spacing={10}>
               <Stack
@@ -57,6 +73,7 @@ export default function SignIn() {
                 <Text color={'teal.400'}>Forgot password?</Text>
               </Stack>
               <Button
+              onClick={handleOnSubmit}
                 bg={'teal.400'}
                 color={'white'}
                 _hover={{
@@ -65,12 +82,12 @@ export default function SignIn() {
                 Sign in
               </Button>
               <Stack pt={6}>
-              <rrd.Link to={"/signup"}>
-                <Text align={'center'}>
-                  New user? <Link color={'teal.400'}>Sign Up</Link>
-                </Text>
-              </rrd.Link>
-            </Stack>
+                <rrd.Link to={"/signup"}>
+                  <Text align={'center'}>
+                    New user? <Link color={'teal.400'}>Sign Up</Link>
+                  </Text>
+                </rrd.Link>
+              </Stack>
             </Stack>
           </Stack>
         </Box>
