@@ -17,6 +17,7 @@
     "@gradio/client": "^0.10.0",
     "@zegocloud/zego-uikit-prebuilt": "^1.10.0",
     "framer-motion": "^10.18.0",
+    "pocketbase": "^0.20.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
