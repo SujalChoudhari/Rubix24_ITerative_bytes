@@ -1,34 +1,31 @@
-import React, { useCallback, useState } from 'react';
-import { Box, Center, Input, Button, Heading } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
+import React, { useCallback } from 'react';
+import { Box, Heading,Container, Text, VStack, Button } from '@chakra-ui/react';
+import SupportMeetingCard from '../components/SupportMeetingCard';
 
-const MeetingCodeCard = () => {
-  const [meetingCode, setMeetingCode] = useState(''); 
+const VideoCall = () => {
 
-  const navigate = useNavigate()
-
-  const handleJoinRoom = useCallback( () => {
-    navigate(`/room/${meetingCode}`)
-  }, [navigate,meetingCode])
-
-  return (
-    <Center h="100vh">
-      <Box p={6} borderWidth="1px" borderRadius="lg" boxShadow="lg" maxW="md">
-        <Heading as="h2" size="lg" mb={4}>
-          Enter Meeting Code
-        </Heading>
-        <Input
-          placeholder="Meeting Code"
-          mb={4}
-          value={meetingCode}
-          onChange={(e) => setMeetingCode(e.target.value)} 
-        />
-        <Center>
-          <Button colorScheme="teal" onClick={handleJoinRoom}>Join Meeting</Button>
-        </Center>
-      </Box>
-    </Center>
-  );
+    return (
+        <Box
+            
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+        >
+            <Container maxW="xl">
+                <VStack align="center" py={8}>
+                    <Heading fontSize="4xl" mb={4}>
+                        Welcome to Arzi Support
+                    </Heading>
+                    <Text fontSize="lg" textAlign="center" >
+                        Connect with our support team through a video call. We're here to assist you. 
+                        Please stay calm and wait for a support person to join you shortly.
+                    </Text>
+                    <SupportMeetingCard/>
+                </VStack>
+            </Container>
+        </Box>
+    );
 };
 
-export default MeetingCodeCard;
+export default VideoCall;
