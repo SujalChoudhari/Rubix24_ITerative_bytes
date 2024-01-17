@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   ChakraProvider,
   Box,
   FormControl,
   FormLabel,
-  Input,
   Select,
   Button,
   Textarea,
   VStack,
-  Image,
 } from '@chakra-ui/react';
 
 const Complaints = () => {
@@ -18,13 +16,11 @@ const Complaints = () => {
     orderOptions: ['Order #1', 'Order #2', 'Order #3'],
     selectedOrder: '',
     address: '',
-    image: null,
-    imageUrl: '',
+    desc: '',
   });
 
   const handleSubmit = () => {
     console.log('Form submitted:', formData);
-    // Add logic for complaint submission
   };
 
   const handleOrderChange = (e) => {
@@ -35,15 +31,10 @@ const Complaints = () => {
     setFormData({ ...formData, address: e.target.value });
   };
 
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    const imageUrl = URL.createObjectURL(file);
-    setFormData({
-      ...formData,
-      image: file,
-      imageUrl: imageUrl,
-    });
+  const handleDescriptionChange = (e) => {
+    setFormData({ ...formData, desc: e.target.value });
   };
+
 
   return (
     <ChakraProvider>
@@ -74,17 +65,22 @@ const Complaints = () => {
           </FormControl>
 
           <FormControl>
-            <FormLabel>Upload Image</FormLabel>
-            <Input
-              type="file"
-              accept="image/*"
-              onChange={handleFileUpload}
-              mb={4}
-              fontSize="md"
+            <FormLabel>Image</FormLabel>
+            <iframe
+              src="https://mihirrajeshpanchal-fruit-ripeness.hf.space"
+              width="100%"
+              height="450"
+            ></iframe>
+
+          </FormControl>
+          
+          <FormControl>
+            <FormLabel>Complaint Description</FormLabel>
+            <Textarea
+              placeholder="Enter your complaint description"
+              value={formData.desc}
+              onChange={handleDescriptionChange}
             />
-            {formData.imageUrl && (
-              <Image src={formData.imageUrl} alt="Uploaded Image" />
-            )}
           </FormControl>
 
           <Button colorScheme="teal" onClick={handleSubmit}>
