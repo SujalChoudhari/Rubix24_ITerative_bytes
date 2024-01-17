@@ -17,12 +17,15 @@
     "@gradio/client": "^0.10.0",
     "@zegocloud/zego-uikit-prebuilt": "^1.10.0",
     "framer-motion": "^10.18.0",
+    "jwt-decode": "^4.0.0",
+    "ms": "^2.1.3",
     "pocketbase": "^0.20.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
     "react-responsive-carousel": "^3.2.23",
-    "react-router-dom": "^6.21.2"
+    "react-router-dom": "^6.21.2",
+    "usehooks-ts": "^2.9.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
