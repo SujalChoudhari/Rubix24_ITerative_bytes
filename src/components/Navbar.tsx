@@ -9,6 +9,7 @@ import {
   Stack,
   useColorMode,
   Collapse,
+  Image,
   Icon,
   Popover,
   PopoverTrigger,
@@ -54,13 +55,7 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Text
-            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            fontFamily={'heading'}
-            color={useColorModeValue('gray.800', 'white')}>
-            Logo
-          </Text>
-
+          <Image src='./logo.png' alt='Arzi' height={35}  />
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
           </Flex>

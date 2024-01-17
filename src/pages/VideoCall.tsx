@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Heading, Container, Text, VStack, useColorModeValue } from '@chakra-ui/react';
 import SupportMeetingCard from '../components/SupportMeetingCard';
 
@@ -10,7 +9,7 @@ const VideoCall = () => {
             alignItems="center"
             justifyContent="center"
             bg={useColorModeValue('gray.100', 'gray.800')}
-            h="100vh" // Set the height to full viewport height
+            h="100vh" 
         >
             <Container maxW="xl">
                 <VStack align="center" py={8}>
