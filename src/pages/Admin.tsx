@@ -31,10 +31,7 @@ const Admin = () => {
             identifier: <Settings />
         },
     ]
-    const navigate = useNavigate()
-    useEffect(() => {
-        !user.isAdmin && navigate("/")
-    }, [])
+    
 
     return (
         <>
