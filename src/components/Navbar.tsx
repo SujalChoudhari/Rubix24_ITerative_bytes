@@ -7,6 +7,7 @@ import {
   IconButton,
   Button,
   Stack,
+  useColorMode,
   Collapse,
   Icon,
   Popover,
@@ -21,10 +22,13 @@ import {
   CloseIcon,
   ChevronDownIcon,
   ChevronRightIcon,
-} from '@chakra-ui/icons'
+  MoonIcon, // New icon for dark mode
+  SunIcon, // New icon for light mode
+} from '@chakra-ui/icons';
 
 export default function WithSubnavigation() {
-  const { isOpen, onToggle } = useDisclosure()
+  const { isOpen, onToggle } = useDisclosure();
+  const { colorMode, toggleColorMode } = useColorMode(); // Added color mode hook
 
   return (
     <Box>
@@ -67,6 +71,12 @@ export default function WithSubnavigation() {
           justify={'flex-end'}
           direction={'row'}
           spacing={6}>
+          {/* Dark/Light Mode Toggle */}
+          <IconButton
+            icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+            onClick={toggleColorMode}
+            aria-label={'Toggle Dark Mode'}
+          />
           <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'} href={'/signin'}>
             Sign In
           </Button>
@@ -90,8 +100,9 @@ export default function WithSubnavigation() {
         <MobileNav />
       </Collapse>
     </Box>
-  )
+  );
 }
+
 
 const DesktopNav = () => {
   const linkColor = useColorModeValue('gray.600', 'gray.200')
