@@ -262,4 +262,8 @@ const NAV_ITEMS: Array<NavItem> = [
     label: 'Track Order',
     href: '/track',
   },
+{
+    label: 'Support',
+    href: '/videocall',
+  },
 ]
