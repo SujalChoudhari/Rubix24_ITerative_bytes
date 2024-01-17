@@ -55,7 +55,7 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Image src='./logo.png' alt='Arzi' height={35}  />
+          <Image src='./logo.png' alt='Arzi' height={35} />
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
           </Flex>
@@ -263,12 +263,12 @@ const NAV_ITEMS: Array<NavItem> = [
   {
     label: 'Complaints',
     href: '/complaints',
-},
-{
-    label: 'Track Order',
+  },
+  {
+    label: 'Track Compliant',
     href: '/track',
   },
-{
+  {
     label: 'Support',
     href: '/videocall',
   },

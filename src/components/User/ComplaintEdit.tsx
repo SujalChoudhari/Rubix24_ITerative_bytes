@@ -118,16 +118,16 @@ const CompliantEdit = ({ recordId }) => {
                 <Input placeholder="Enter status" name="status" value={formData.status} onChange={handleInputChange} />
             </FormControl>
             <Box>
-                <Button colorScheme="teal" onClick={() => {
+                <Button colorScheme="red" onClick={() => {
                     handleMarkAsSatisfied(); toast({
-                        title: 'Hurray!',
-                        description: "One More satisfied Customer!",
+                        title: 'Phew!',
+                        description: "Reverted Just in time",
                         status: 'success',
                         duration: 2000, // Adjust the duration as needed
                         isClosable: true,
                     });
                 }}>
-                    Mark as Satisfied
+                    Revert
                 </Button>
                 <Button colorScheme="teal" variant={"ghost"} onClick={() => {
                     handleUpdateRecord(); toast({
