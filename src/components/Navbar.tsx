@@ -7,6 +7,7 @@ import {
   IconButton,
   Button,
   Stack,
+  useColorMode,
   Collapse,
   Icon,
   Popover,
@@ -21,10 +22,13 @@ import {
   CloseIcon,
   ChevronDownIcon,
   ChevronRightIcon,
-} from '@chakra-ui/icons'
+  MoonIcon, // New icon for dark mode
+  SunIcon, // New icon for light mode
+} from '@chakra-ui/icons';
 
 export default function WithSubnavigation() {
-  const { isOpen, onToggle } = useDisclosure()
+  const { isOpen, onToggle } = useDisclosure();
+  const { colorMode, toggleColorMode } = useColorMode(); // Added color mode hook
 
   return (
     <Box>
@@ -67,6 +71,12 @@ export default function WithSubnavigation() {
           justify={'flex-end'}
           direction={'row'}
           spacing={6}>
+          {/* Dark/Light Mode Toggle */}
+          <IconButton
+            icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+            onClick={toggleColorMode}
+            aria-label={'Toggle Dark Mode'}
+          />
           <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'} href={'/signin'}>
             Sign In
           </Button>
@@ -76,10 +86,10 @@ export default function WithSubnavigation() {
             fontSize={'sm'}
             fontWeight={600}
             color={'white'}
-            bg={'pink.400'}
+            bg={'teal.400'}
             href={'/signup'}
             _hover={{
-              bg: 'pink.300',
+              bg: 'teal.300',
             }}>
             Sign Up
           </Button>
@@ -90,8 +100,9 @@ export default function WithSubnavigation() {
         <MobileNav />
       </Collapse>
     </Box>
-  )
+  );
 }
+
 
 const DesktopNav = () => {
   const linkColor = useColorModeValue('gray.600', 'gray.200')
@@ -150,12 +161,12 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
       display={'block'}
       p={2}
       rounded={'md'}
-      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
+      _hover={{ bg: useColorModeValue('teal.50', 'gray.900') }}>
       <Stack direction={'row'} align={'center'}>
         <Box>
           <Text
             transition={'all .3s ease'}
-            _groupHover={{ color: 'pink.400' }}
+            _groupHover={{ color: 'teal.400' }}
             fontWeight={500}>
             {label}
           </Text>
@@ -169,7 +180,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
           justify={'flex-end'}
           align={'center'}
           flex={1}>
-          <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={'teal.400'} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Box>

@@ -13,11 +13,12 @@ import {
   Button,
   Heading,
   Text,
-  useColorModeValue,
   Link,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import * as rrd from 'react-router-dom'
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false)
@@ -78,18 +79,20 @@ export default function SignUp() {
               <Button
                 loadingText="Submitting"
                 size="lg"
-                bg={'blue.400'}
+                bg={'teal.400'}
                 color={'white'}
                 _hover={{
-                  bg: 'blue.500',
+                  bg: 'teal.500',
                 }}>
                 Sign up
               </Button>
             </Stack>
             <Stack pt={6}>
-              <Text align={'center'}>
-                Already a user? <Link color={'blue.400'}>Login</Link>
-              </Text>
+              <rrd.Link to={"/signin"}>
+                <Text align={'center'}>
+                  Already a user? <Link color={'teal.400'}>Sign In</Link>
+                </Text>
+              </rrd.Link>
             </Stack>
           </Stack>
         </Box>

@@ -1,5 +1,5 @@
-// import React from 'react';
-import { Flex, Box, Heading, Text } from '@chakra-ui/react';
+import React from 'react';
+import { Flex, Box, Heading, Text, useColorModeValue } from '@chakra-ui/react';
 import { FaUser, FaEdit, FaCheck } from 'react-icons/fa'; // Import suitable icons
 
 const HowItWorks = () => {
@@ -22,20 +22,29 @@ const HowItWorks = () => {
     ];
 
     return (
-        <Box py={12} px={4} bg="teal.500" color={"white"}>
+        <Box py={12} px={4} bg={useColorModeValue('teal.500', 'teal.800')} color={useColorModeValue('white', 'gray.200')}>
             <Heading textAlign="center" mb={8} fontSize="3xl">
                 How It Works
             </Heading>
             <Flex direction={{ base: 'column', md: 'row' }} alignItems="center" justifyContent="center">
                 {steps.map((step, index) => (
-                    <Box key={index} textAlign="center" display={"flex"} flexDirection={"column"} alignItems={"center"} justifyContent={"center"} mx={4} mb={{ base: 8, md: 0 }}>
-                        <Box fontSize="2xl" alignSelf={"center"} color="white.500" mb={2} >
+                    <Box
+                        key={index}
+                        textAlign="center"
+                        display="flex"
+                        flexDirection="column"
+                        alignItems="center"
+                        justifyContent="center"
+                        mx={4}
+                        mb={{ base: 8, md: 0 }}
+                    >
+                        <Box fontSize="2xl" alignSelf="center" color={useColorModeValue('white.500', 'gray.500')} mb={2}>
                             {step.icon}
                         </Box>
-                        <Heading fontSize="xl" mb={2}>
+                        <Heading fontSize="xl" mb={2} color={useColorModeValue('white', 'gray.300')}>
                             {step.title}
                         </Heading>
-                        <Text>{step.description}</Text>
+                        <Text color={useColorModeValue('white.700', 'gray.400')}>{step.description}</Text>
                     </Box>
                 ))}
             </Flex>
