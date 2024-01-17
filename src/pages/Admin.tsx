@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Navigate, useNavigate } from 'react-router';
 import { Box, Flex, Spacer, VStack, Text, Container, IconButton, useColorMode, useColorModeValue, Button, Icon } from '@chakra-ui/react';
 import { FaSun, FaMoon, FaComments, FaChartBar, FaExclamationCircle, FaCog } from 'react-icons/fa';
 import SupportChatRoom from '../components/Admin/SupportChatRoom';
 import Complaints from '../components/Admin/Complaints';
 import Settings from '../components/Admin/Settings';
 import Statistics from '../components/Admin/Statistics';
-
+import { usePocket } from '../contexts/PocketContext';
 const Admin = () => {
-
+    const { user } = usePocket();
     const [selectedPanel, setselectedPanel] = useState(<SupportChatRoom />)
 
     const sidebar = [
@@ -30,6 +31,10 @@ const Admin = () => {
             identifier: <Settings />
         },
     ]
+    const navigate = useNavigate()
+    useEffect(() => {
+        !user.isAdmin && navigate("/")
+    }, [])
 
     return (
         <>

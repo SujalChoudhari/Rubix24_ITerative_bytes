@@ -8,6 +8,8 @@ import {
   Button,
   Textarea,
   VStack,
+  Switch,
+  Center,
 } from '@chakra-ui/react';
 import PocketBase from 'pocketbase';
 import { useNavigate } from 'react-router';
@@ -26,17 +28,19 @@ const Complaints = () => {
     selectedComplaint: '',
     address: '',
     desc: '',
+    isAnonymous: false
   });
 
   const navigate = useNavigate();
 
   const data = {
-    "username": user.name,
+    "username": formData.isAnonymous ? "Anonymous" : user.name,
     "description": formData.desc,
     "status": "Processing Started",
     "address": formData.address,
     "orderId": formData.selectedOrder,
-    "complaintType": formData.selectedComplaint
+    "complaintType": formData.selectedComplaint,
+    "userId": user.id
   };
 
   const handleSubmit = () => {
@@ -54,12 +58,18 @@ const Complaints = () => {
       selectedComplaint: '',
       address: '',
       desc: '',
+      isAnonymous: false
     })
   };
 
   const handleOrderChange = (e) => {
     setFormData({ ...formData, selectedOrder: e.target.value });
   };
+
+  const toggleAnonymously = (e) => {
+    setFormData({ ...formData, isAnonymous: !formData.isAnonymous })
+
+  }
 
   const handleComplaintChange = (e) => {
     setFormData({ ...formData, selectedComplaint: e.target.value });
@@ -76,71 +86,73 @@ const Complaints = () => {
 
   return (
     <ChakraProvider>
-      <Box p={8}>
-        <VStack spacing={4} align="stretch">
-          <FormControl>
-            <FormLabel>Order ID</FormLabel>
-            <Select
-              placeholder="Select Order"
-              value={formData.selectedOrder}
-              onChange={handleOrderChange}
-            >
-              {formData.orderOptions.map((order, index) => (
-                <option key={index} value={order}>
-                  {order}
-                </option>
-              ))}
-            </Select>
-          </FormControl>
+      <Center >
+        <Box p={8} width={"60vw"}>
+          <VStack spacing={4} align="stretch">
+            <FormControl>
+              <FormLabel>Order ID</FormLabel>
+              <Select
+                placeholder="Select Order"
+                value={formData.selectedOrder}
+                onChange={handleOrderChange}
+              >
+                {formData.orderOptions.map((order, index) => (
+                  <option key={index} value={order}>
+                    {order}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl>
+              <FormLabel>Complaint Type</FormLabel>
+              <Select
+                placeholder="Select Complaint Type"
+                value={formData.selectedComplaint}
+                onChange={handleComplaintChange}
+              >
+                {formData.complaintOptions.map((order, index) => (
+                  <option key={index} value={order}>
+                    {order}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl>
+              <FormLabel>Address</FormLabel>
+              <Textarea
+                placeholder="Enter your address"
+                value={formData.address}
+                onChange={handleAddressChange}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Image</FormLabel>
+              <iframe
+                src="https://mihirrajeshpanchal-fruit-ripeness.hf.space"
+                width="100%"
+                height="450"
+              ></iframe>
+            </FormControl>
+            <FormControl>
+              <FormLabel>Complaint Description</FormLabel>
+              <Textarea
+                placeholder="Enter your complaint description"
+                value={formData.desc}
+                onChange={handleDescriptionChange}
+              />
+            </FormControl>
 
-          <FormControl>
-            <FormLabel>Complaint Type</FormLabel>
-            <Select
-              placeholder="Select Complaint Type"
-              value={formData.selectedComplaint}
-              onChange={handleComplaintChange}
-            >
-              {formData.complaintOptions.map((order, index) => (
-                <option key={index} value={order}>
-                  {order}
-                </option>
-              ))}
-            </Select>
-          </FormControl>
+            <FormControl>
+              <FormLabel htmlFor='anonymous'>Submit Anonymously</FormLabel>
+              <Switch id='anonymous' onChange={toggleAnonymously} />
+            </FormControl>
 
-          <FormControl>
-            <FormLabel>Address</FormLabel>
-            <Textarea
-              placeholder="Enter your address"
-              value={formData.address}
-              onChange={handleAddressChange}
-            />
-          </FormControl>
-
-          <FormControl>
-            <FormLabel>Image</FormLabel>
-            <iframe
-              src="https://mihirrajeshpanchal-fruit-ripeness.hf.space"
-              width="100%"
-              height="450"
-            ></iframe>
-
-          </FormControl>
-
-          <FormControl>
-            <FormLabel>Complaint Description</FormLabel>
-            <Textarea
-              placeholder="Enter your complaint description"
-              value={formData.desc}
-              onChange={handleDescriptionChange}
-            />
-          </FormControl>
-
-          <Button colorScheme="teal" onClick={handleSubmit}>
-            Submit Complaint
-          </Button>
-        </VStack>
-      </Box>
+            <Button colorScheme="teal" onClick={handleSubmit}>
+              Submit Complaint
+            </Button>
+          </VStack>
+        </Box>
+      </Center>
 
     </ChakraProvider>
   );

@@ -39,7 +39,7 @@ function Complaints() {
                 <Divider />
                 <List maxH="300px" overflowY="auto">
                     {compliants.map((meet) => (
-                        meet.username == user.name &&
+                        meet.userId == user.id &&
                         <ListItem key={meet.id} py="12px">
                             <Button
                                 width="100%"
