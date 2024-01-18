@@ -47,7 +47,7 @@ const Admin = ({ company }: { company: string }) => {
 
     return (
         <>
-            <Flex h="100vh">
+            <Flex minH="100vh">
                 {/* Sidebar */}
                 <Box w="250px" bg={useColorModeValue('teal.500', 'teal.800')} p={4} color="white">
                     <VStack spacing={4} align="left">

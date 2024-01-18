@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChakraProvider, useToast, Flex, Heading, Input, Button, ColorModeScript, useColorMode, FormControl, FormHelperText, FormLabel, Box, useBoolean, Progress } from '@chakra-ui/react';
+import { ChakraProvider, useToast, Flex, Heading, Input, Button, ColorModeScript, useColorMode, FormControl, FormHelperText, FormLabel, Box, useBoolean, Progress, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack } from '@chakra-ui/react';
 import PocketBase from 'pocketbase';
 import { Navigate, useNavigate } from 'react-router';
 const pb = new PocketBase('http://127.0.0.1:8090');
@@ -18,6 +18,7 @@ const CompliantEdit = ({ recordId }) => {
     const { colorMode, toggleColorMode } = useColorMode();
     const navigate = useNavigate();
     const toast = useToast()
+
     const [unsavedChanges, setUnsavedChanges] = useState(false)
 
     useEffect(() => {
@@ -31,6 +32,7 @@ const CompliantEdit = ({ recordId }) => {
             }
         };
 
+
         fetchRecordData();
     }, [recordId]);
 
@@ -42,6 +44,10 @@ const CompliantEdit = ({ recordId }) => {
         }));
         setUnsavedChanges(false);
     };
+
+
+
+
 
     const handleUpdateRecord = async () => {
         try {
@@ -55,6 +61,15 @@ const CompliantEdit = ({ recordId }) => {
         setUnsavedChanges(true);
     };
 
+    const handleUpdateSlider = async (val) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            progress: val,
+        }));
+
+        await pb.collection('complaints').update(recordId, formData);
+    }
+
     const handleMarkAsSatisfied = async () => {
         try {
             // Update the status or any other field to mark the complaint as satisfied
@@ -66,11 +81,49 @@ const CompliantEdit = ({ recordId }) => {
         navigate(0)
     };
 
+    const labelStyles = {
+        mt: '2',
+        ml: '-2.5',
+        fontSize: 'sm',
+    }
+
     return (
-        <Flex direction="column" align="center" justify="center" minH="70vh">
+        <Flex direction="column" align="center" justify="center" minH="90vh">
             <Heading mb={4}>Update Complaint</Heading>
-            <Progress value={64} height={"1vh"} />
             <ColorModeScript initialColorMode={colorMode} />
+
+            <FormControl>
+                <Box mb={"4vh"}>
+                    <FormLabel>Update Progress</FormLabel>
+                    <FormHelperText>Update the Slider to indicat user the progress</FormHelperText>
+                    <Slider value={formData.progress} aria-label='slider-ex-6' onChange={(val) => handleUpdateSlider(val)}>
+                        <SliderMark value={25} {...labelStyles}>
+                            25%
+                        </SliderMark>
+                        <SliderMark value={50} {...labelStyles}>
+                            50%
+                        </SliderMark>
+                        <SliderMark value={75} {...labelStyles}>
+                            75%
+                        </SliderMark>
+                        <SliderMark
+                            value={formData.progress}
+                            textAlign='center'
+                            bg='blue.500'
+                            color='white'
+                            mt='-10'
+                            ml='-5'
+                            w='12'
+                        >
+                            {formData.progress}%
+                        </SliderMark>
+                        <SliderTrack>
+                            <SliderFilledTrack />
+                        </SliderTrack>
+                        <SliderThumb />
+                    </Slider>
+                </Box>
+            </FormControl>
 
             <FormControl mb={3}>
                 <Box display={'inline-block'}>

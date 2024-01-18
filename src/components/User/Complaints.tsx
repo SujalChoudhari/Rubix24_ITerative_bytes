@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Flex, VStack, Text, Button, List, ListItem, Divider } from '@chakra-ui/react';
+import { Box, Flex, VStack, Text, Button, List, ListItem, Divider, Progress } from '@chakra-ui/react';
 import PocketBase from 'pocketbase';
 import CompliantEdit from './ComplaintEdit';
 import { usePocket } from '../../contexts/PocketContext';

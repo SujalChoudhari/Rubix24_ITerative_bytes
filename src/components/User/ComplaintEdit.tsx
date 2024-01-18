@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChakraProvider, useToast, Flex, Heading, Input, Button, ColorModeScript, useColorMode, FormControl, FormHelperText, FormLabel, Box, useBoolean, Select } from '@chakra-ui/react';
+import { ChakraProvider, useToast, Flex, Heading, Input, Button, ColorModeScript, useColorMode, FormControl, FormHelperText, FormLabel, Box, useBoolean, Select, Progress, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack } from '@chakra-ui/react';
 import PocketBase from 'pocketbase';
 import { Navigate, useNavigate } from 'react-router';
 const pb = new PocketBase('http://127.0.0.1:8090');
@@ -65,10 +65,44 @@ const CompliantEdit = ({ recordId }) => {
         navigate(0)
     };
 
+    const labelStyles = {
+        mt: '2',
+        ml: '-2.5',
+        fontSize: 'sm',
+    }
     return (
         <Flex direction="column" align="center" justify="center" minH="70vh">
             <Heading mb={4}>Update Complaint</Heading>
             <ColorModeScript initialColorMode={colorMode} />
+            <FormControl mb={3}>
+                <FormLabel>Current Progress</FormLabel>
+                <Slider aria-label='slider-ex-6' value={formData.progress}  >
+                    <SliderMark value={25} {...labelStyles}>
+                        25%
+                    </SliderMark>
+                    <SliderMark value={50} {...labelStyles}>
+                        50%
+                    </SliderMark>
+                    <SliderMark value={75} {...labelStyles}>
+                        75%
+                    </SliderMark>
+                    <SliderMark
+                        value={formData.progress}
+                        textAlign='center'
+                        bg='blue.500'
+                        color='white'
+                        mt='-10'
+                        ml='-5'
+                        w='12'
+                    >
+                        {formData.progress}%
+                    </SliderMark>
+                    <SliderTrack>
+                        <SliderFilledTrack />
+                    </SliderTrack>
+                    {/* <SliderThumb /> */}
+                </Slider>
+            </FormControl>
 
             <FormControl mb={3}>
                 <Box display={'inline-block'}>
@@ -113,7 +147,7 @@ const CompliantEdit = ({ recordId }) => {
                     <FormLabel>Status</FormLabel>
                     <FormHelperText>Provide the current status</FormHelperText>
                 </Box>
-                <Input placeholder="Enter status" name="status" value={formData.status} onChange={handleInputChange} />
+                <Input readOnly placeholder="Enter status" name="status" value={formData.status} onChange={handleInputChange} />
             </FormControl>
             <Box>
                 <Button colorScheme="red" onClick={() => {
