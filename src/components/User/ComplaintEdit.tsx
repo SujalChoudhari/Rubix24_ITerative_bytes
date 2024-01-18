@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ChakraProvider, useToast, Flex, Heading, Input, Button, ColorModeScript, useColorMode, FormControl, FormHelperText, FormLabel, Box, useBoolean, Select, Progress, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack } from '@chakra-ui/react';
 import PocketBase from 'pocketbase';
 import { Navigate, useNavigate } from 'react-router';
+
 const pb = new PocketBase('http://127.0.0.1:8090');
 
 const CompliantEdit = ({ recordId }) => {
@@ -70,6 +71,9 @@ const CompliantEdit = ({ recordId }) => {
         ml: '-2.5',
         fontSize: 'sm',
     }
+
+    const mailtoLink = `mailto:mockcourt@sujal.xyz?subject=Consumer%20Court%20Complaint&body=Username:%20${formData.username}%0D%0A%0D%0ADescription:%20${formData.description}%0D%0A%0D%0AStatus:%20${formData.status}%0D%0A%0D%0AAddress:%20${formData.address}%0D%0A%0D%0AOrder%20ID:%20${formData.orderId}%0D%0A%0D%0AComplaint%20Type:%20${formData.complaintType}`;
+
     return (
         <Flex direction="column" align="center" justify="center" minH="70vh">
             <Heading mb={4}>Update Complaint</Heading>
@@ -161,7 +165,7 @@ const CompliantEdit = ({ recordId }) => {
                 }}>
                     Revert
                 </Button>
-                <Button colorScheme="teal" variant={"ghost"} onClick={() => {
+                <Button colorScheme="teal" mr={4} variant={"ghost"} onClick={() => {
                     handleUpdateRecord(); toast({
                         title: 'Saved Successfully.',
                         description: "We've saved the data",
@@ -172,9 +176,11 @@ const CompliantEdit = ({ recordId }) => {
                 }}>
                     Update Complaint
                 </Button>
+                <Button onClick={() => { window.open(mailtoLink, '_blank'); }}>
+                    Appeal Consumer Court
+                </Button>
             </Box>
         </Flex>
-
     );
 };
 

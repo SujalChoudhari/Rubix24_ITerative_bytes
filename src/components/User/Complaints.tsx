@@ -37,7 +37,7 @@ function Complaints() {
             <VStack spacing={4} align="left" width="25%">
                 <Text fontSize="2xl" fontWeight="bold">Compliants</Text>
                 <Divider />
-                <List maxH="300px" overflowY="auto">
+                <List maxH="80vh" overflowY="auto">
                     {compliants.map((meet) => (
                         meet.userId == user.id &&
                         <ListItem key={meet.id} py="12px">
