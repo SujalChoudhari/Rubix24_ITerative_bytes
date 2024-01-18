@@ -15,16 +15,19 @@ import {
   Text,
   Link,
   useColorModeValue,
-} from '@chakra-ui/react'
+  Image,
+} from '@chakra-ui/react';
 import React, { useCallback, useRef } from "react";
 
 import { usePocket } from "../contexts/PocketContext";
-import { useState } from 'react'
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
-import * as rrd from 'react-router-dom'
+import { useState } from 'react';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import * as rrd from 'react-router-dom';
+
+import yourImage from '../assets/registerrrration.png';
 
 export default function SignUp() {
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -46,8 +49,11 @@ export default function SignUp() {
       minH={'100vh'}
       align={'center'}
       justify={'center'}
-      bg={useColorModeValue('gray.50', 'gray.800')}>
-      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+      bg={useColorModeValue('gray.50', 'gray.800')}
+      direction={{ base: 'column', md: 'row' }}
+    >
+      {/* Left side - Sign-up form */}
+      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6} width={{ base: '100%', md: '50%' }}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'} textAlign={'center'}>
             Sign up
@@ -60,7 +66,8 @@ export default function SignUp() {
           rounded={'lg'}
           bg={useColorModeValue('white', 'gray.700')}
           boxShadow={'lg'}
-          p={8}>
+          p={8}
+        >
           <Stack spacing={4}>
             <HStack>
               <Box>
@@ -98,10 +105,10 @@ export default function SignUp() {
                 onClick={handleOnSubmit}
                 loadingText="Submitting"
                 size="lg"
-                bg={'teal.400'}
+                bg={'#4195D3'}
                 color={'white'}
                 _hover={{
-                  bg: 'teal.500',
+                  bg: '#4195D3',
                 }}>
                 Sign up
               </Button>
@@ -109,13 +116,18 @@ export default function SignUp() {
             <Stack pt={6}>
               <rrd.Link to={"/signin"}>
                 <Text align={'center'}>
-                  Already a user? <Link color={'teal.400'}>Sign In</Link>
+                  Already a user? <Link color={'#4195D3'}>Sign In</Link>
                 </Text>
               </rrd.Link>
             </Stack>
           </Stack>
         </Box>
       </Stack>
+
+      {/* Right side - Image with reduced margin */}
+      <Box ml={{ base: 0, md: 4 }} width={{ base: '100%', md: '50%' }}>
+        <Image src={yourImage} alt="Your Image" boxSize="80%" objectFit="cover" />
+      </Box>
     </Flex>
-  )
+  );
 }

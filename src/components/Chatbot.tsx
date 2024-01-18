@@ -69,7 +69,6 @@ const Chatbot = () => {
                 message: `Explore the Homepage of the Website for Features`,
                 end: true
             },
-
         ]}
         handleEnd={handleEnd} />;
 };
