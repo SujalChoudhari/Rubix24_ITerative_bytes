@@ -11,6 +11,7 @@ import {
   Button,
   Link,
   Heading,
+  Image,
   Text,
   useColorModeValue,
 } from '@chakra-ui/react'
@@ -94,4 +95,4 @@ export default function SignIn() {
       </Stack>
     </Flex>
   )
-}
+};

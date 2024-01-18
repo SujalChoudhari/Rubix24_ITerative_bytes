@@ -1,59 +1,85 @@
-// import React from 'react';
-import { Box, Heading, Text } from '@chakra-ui/react';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import React, { SVGProps } from 'react';
+import {
+  Container,
+  Box,
+  chakra,
+  Text,
+  SimpleGrid,
+  Flex,
+  Link,
+  useColorModeValue,
+  Icon
+  
+} from '@chakra-ui/react';
+import {RepeatIcon,QuestionIcon} from '@chakra-ui/icons';
+import { MdOutlinePersonPin } from 'react-icons/md';
+interface IFeature {
+  heading: string;
+  content: string;
+  icon: React.ReactElement;
+}
 
-const Slider = () => {
-    return (
-        <Box position="relative" overflow="hidden">
-            <Carousel showThumbs={false} infiniteLoop autoPlay>
-                <div style={{ position: 'relative', height: '500px' }}>
-                    <img src="./slides/slide1.jpg" alt="Slide 1" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(30%)' }} />
-                    <Box position="absolute" top="50%" left="50%" transform="translate(-50%, -50%)" textAlign="center" color="white">
-                        <Heading fontSize="2xl" mb={2}>
-                            Efficient Complaint Tracking
-                        </Heading>
-                        <Text mt={2}>
-                            Track and manage complaints seamlessly with Arzi's intuitive system.
-                        </Text>
-                    </Box>
-                </div>
-                <div style={{ position: 'relative', height: '500px' }}>
-                    <img src="./slides/slide2.jpg" alt="Slide 2" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(30%)' }} />
-                    <Box position="absolute" top="50%" left="50%" transform="translate(-50%, -50%)" textAlign="center" color="white">
-                        <Heading fontSize="2xl" mb={2}>
-                            Quick Resolution
-                        </Heading>
-                        <Text mt={2}>
-                            Arzi ensures timely resolution, providing a hassle-free experience for users.
-                        </Text>
-                    </Box>
-                </div>
-                <div style={{ position: 'relative', height: '500px' }}>
-                    <img src="./slides/slide3.jpg" alt="Slide 3" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(30%)' }} />
-                    <Box position="absolute" top="50%" left="50%" transform="translate(-50%, -50%)" textAlign="center" color="white">
-                        <Heading fontSize="2xl" mb={2}>
-                            User-Friendly Interface
-                        </Heading>
-                        <Text mt={2}>
-                            Navigate Arzi effortlessly with its user-friendly and intuitive interface.
-                        </Text>
-                    </Box>
-                </div>
-                <div style={{ position: 'relative', height: '500px' }}>
-                    <img src="./slides/slide4.jpg" alt="Slide 4" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(30%)' }} />
-                    <Box position="absolute" top="50%" left="50%" transform="translate(-50%, -50%)" textAlign="center" color="white">
-                        <Heading fontSize="2xl" mb={2}>
-                            Secure Complaint Management
-                        </Heading>
-                        <Text mt={2}>
-                            Your complaints are handled with utmost security and confidentiality.
-                        </Text>
-                    </Box>
-                </div>
-            </Carousel>
-        </Box>
-    );
+export const Slider: IFeature[] = [
+  {
+    heading: 'Ask Community',
+    content: 'Ask question,post tips and even answer each others,questions through community forums.',
+    icon: <MdOutlinePersonPin size={36} />,
+  },
+  {
+    heading: 'Complaint Status',
+    content: 'Our user-friendly platform allows you to effortlessly check the status of your submitted complaints.',
+    icon:<RepeatIcon w={8} h={8}  />
+  },
+  {
+    heading: 'Help',
+    content: 'Effortlessly track the status of your support tickets and receive timely updates. ',
+    icon:<QuestionIcon w={10} h={9} />
+  },
+];
+
+const Slide = () => {
+  return (
+    <Container maxW="6xl" p={{ base: 5, md: 10 }}>
+      <chakra.h3 fontSize="4xl" fontWeight="bold" mb={20} textAlign="center">
+        Quick Link
+      </chakra.h3>
+      <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} placeItems="center" spacing={10} mb={4}>
+        {Slider.map((feature, index) => (
+          <Box
+            key={index}
+            bg={useColorModeValue('gray.100', 'gray.700')}
+            p={6}
+            rounded="lg"
+            textAlign="center"
+            position="relative"
+          >
+            <Flex
+              p={2}
+              w="max-content"
+              color="white"
+              bgGradient="linear(to-br, #228be6, #15aabf)"
+              rounded="md"
+              marginInline="auto"
+              position="absolute"
+              left={0}
+              right={0}
+              top="-1.5rem"
+              boxShadow="lg"
+            >
+              {feature.icon}
+            </Flex>
+            <chakra.h3 fontWeight="semibold" fontSize="2xl" mt={6}>
+              {feature.heading}
+            </chakra.h3>
+            <Text fontSize="md" mt={4}>
+              {feature.content}
+            </Text>
+            
+          </Box>
+        ))}
+      </SimpleGrid>
+    </Container>
+  );
 };
 
-export default Slider;
+export default Slide;

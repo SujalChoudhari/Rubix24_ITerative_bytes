@@ -1,5 +1,4 @@
-'use client'
-
+import React from 'react';
 import {
   Box,
   Flex,
@@ -17,19 +16,23 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
 import {
+  LockIcon,
   HamburgerIcon,
   CloseIcon,
   ChevronDownIcon,
   ChevronRightIcon,
-  MoonIcon, // New icon for dark mode
-  SunIcon, // New icon for light mode
+  MoonIcon,
+  SunIcon,
 } from '@chakra-ui/icons';
+
+
+// ... (Previous code remains unchanged)
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
-  const { colorMode, toggleColorMode } = useColorMode(); // Added color mode hook
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <Box>
@@ -42,11 +45,13 @@ export default function WithSubnavigation() {
         borderBottom={1}
         borderStyle={'solid'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}
-        align={'center'}>
+        align={'center'}
+      >
         <Flex
           flex={{ base: 1, md: 'auto' }}
           ml={{ base: -2 }}
-          display={{ base: 'flex', md: 'none' }}>
+          display={{ base: 'flex', md: 'none' }}
+        >
           <IconButton
             onClick={onToggle}
             icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
@@ -55,7 +60,10 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Image src='./logo.png' alt='Arzi' height={35} />
+          <Image src='./logooo.png' alt='Arzi' height={35} />
+          <Text fontWeight="bold" lineHeight={1} fontSize={35} align="center">
+            RZI
+          </Text>
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
           </Flex>
@@ -63,30 +71,46 @@ export default function WithSubnavigation() {
 
         <Stack
           flex={{ base: 1, md: 0 }}
-          justify={'flex-end'}
-          direction={'row'}
-          spacing={6}>
-          {/* Dark/Light Mode Toggle */}
-          <IconButton
-            icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-            onClick={toggleColorMode}
-            aria-label={'Toggle Dark Mode'}
-          />
-          <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'} href={'/signin'}>
-            Sign In
-          </Button>
+          justify={{ base: 'flex-end', md: 'space-between' }}
+          direction={{ base: 'column', md: 'row' }}
+          spacing={{ base: 4, md: 6 }}
+        >
+          <Stack spacing={4} direction="row" align="center">
+            <Button
+              as={'a'}
+              fontSize={'sm'}
+              fontWeight={400}
+              variant={'link'}
+              href={'/signin'}
+              px={4}
+              py={2}
+              mb={{ base: 2, md: 0 }}
+              disabled={isOpen}
+            >
+              <Icon as={LockIcon} boxSize={4} mr={2} />
+              Sign In
+            </Button>
+            <IconButton
+              icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+              onClick={toggleColorMode}
+              aria-label={'Toggle Dark Mode'}
+              disabled={isOpen} 
+            />
+          </Stack>
           <Button
             as={'a'}
             display={{ base: 'none', md: 'inline-flex' }}
             fontSize={'sm'}
             fontWeight={600}
             color={'white'}
-            bg={'teal.400'}
+            bg={'#4195D3'}
             href={'/signup'}
             _hover={{
-              bg: 'teal.300',
-            }}>
-            Sign Up
+              bg: '#4195D3',
+            }}
+            disabled={isOpen}
+          >
+            Get Started
           </Button>
         </Stack>
       </Flex>
@@ -99,10 +123,12 @@ export default function WithSubnavigation() {
 }
 
 
-const DesktopNav = () => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200')
-  const linkHoverColor = useColorModeValue('gray.800', 'white')
-  const popoverContentBgColor = useColorModeValue('white', 'gray.800')
+
+
+const DesktopNav: React.FC = () => {
+  const linkColor = useColorModeValue('gray.600', 'gray.200');
+  const linkHoverColor = useColorModeValue('gray.800', 'white');
+  const popoverContentBgColor = useColorModeValue('white', 'gray.800');
 
   return (
     <Stack direction={'row'} spacing={4}>
@@ -120,7 +146,8 @@ const DesktopNav = () => {
                 _hover={{
                   textDecoration: 'none',
                   color: linkHoverColor,
-                }}>
+                }}
+              >
                 {navItem.label}
               </Box>
             </PopoverTrigger>
@@ -132,7 +159,8 @@ const DesktopNav = () => {
                 bg={popoverContentBgColor}
                 p={4}
                 rounded={'xl'}
-                minW={'sm'}>
+                minW={'sm'}
+              >
                 <Stack>
                   {navItem.children.map((child) => (
                     <DesktopSubNav key={child.label} {...child} />
@@ -144,10 +172,10 @@ const DesktopNav = () => {
         </Box>
       ))}
     </Stack>
-  )
-}
+  );
+};
 
-const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
+const DesktopSubNav: React.FC<NavItem> = ({ label, href, subLabel }) => {
   return (
     <Box
       as="a"
@@ -156,13 +184,15 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
       display={'block'}
       p={2}
       rounded={'md'}
-      _hover={{ bg: useColorModeValue('teal.50', 'gray.900') }}>
+      _hover={{ bg: useColorModeValue('teal.50', 'gray.900') }}
+    >
       <Stack direction={'row'} align={'center'}>
         <Box>
           <Text
             transition={'all .3s ease'}
             _groupHover={{ color: 'teal.400' }}
-            fontWeight={500}>
+            fontWeight={500}
+          >
             {label}
           </Text>
           <Text fontSize={'sm'}>{subLabel}</Text>
@@ -174,26 +204,59 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
           _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
           justify={'flex-end'}
           align={'center'}
-          flex={1}>
+          flex={1}
+        >
           <Icon color={'teal.400'} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Box>
-  )
-}
+  );
+};
 
-const MobileNav = () => {
+const MobileNav: React.FC = () => {
   return (
     <Stack bg={useColorModeValue('white', 'gray.800')} p={4} display={{ md: 'none' }}>
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
+      <Box py={2}>
+        <Button
+          as={'a'}
+          href={'/signin'}
+          fontSize={'md'}
+          fontWeight={600}
+          color={'white'}
+          bg={'#4195D3'}
+          _hover={{
+            bg: '#4195D3',
+          }}
+          w="full"
+        >
+          Sign In
+        </Button>
+      </Box>
+      <Box py={2}>
+        <Button
+          as={'a'}
+          href={'/signup'}
+          fontSize={'md'}
+          fontWeight={600}
+          color={'white'}
+          bg={'#4195D3'}
+          _hover={{
+            bg: '#4195D3',
+          }}
+          w="full"
+        >
+          Get Started
+        </Button>
+      </Box>
     </Stack>
-  )
-}
+  );
+};
 
-const MobileNavItem = ({ label, children, href }: NavItem) => {
-  const { isOpen, onToggle } = useDisclosure()
+const MobileNavItem: React.FC<NavItem> = ({ label, children, href }) => {
+  const { isOpen, onToggle } = useDisclosure();
 
   return (
     <Stack spacing={4} onClick={children && onToggle}>
@@ -205,7 +268,8 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         alignItems="center"
         _hover={{
           textDecoration: 'none',
-        }}>
+        }}
+      >
         <Text fontWeight={600} color={useColorModeValue('gray.600', 'gray.200')}>
           {label}
         </Text>
@@ -227,7 +291,8 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
           borderLeft={1}
           borderStyle={'solid'}
           borderColor={useColorModeValue('gray.200', 'gray.700')}
-          align={'start'}>
+          align={'start'}
+        >
           {children &&
             children.map((child) => (
               <Box as="a" key={child.label} py={2} href={child.href}>
@@ -237,14 +302,14 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         </Stack>
       </Collapse>
     </Stack>
-  )
-}
+  );
+};
 
 interface NavItem {
-  label: string
-  subLabel?: string
-  children?: Array<NavItem>
-  href?: string
+  label: string;
+  subLabel?: string;
+  children?: Array<NavItem>;
+  href?: string;
 }
 
 const NAV_ITEMS: Array<NavItem> = [
@@ -252,14 +317,6 @@ const NAV_ITEMS: Array<NavItem> = [
     label: 'Home',
     href: '/',
   },
-  // {
-  //   label: 'Orders',
-  //   href: '/orders',
-  // },
-  // {
-  //   label: 'Inventory',
-  //   href: '/inventory',
-  // },
   {
     label: 'Complaints',
     href: '/complaints',
@@ -276,4 +333,4 @@ const NAV_ITEMS: Array<NavItem> = [
     label: 'Support',
     href: '/videocall',
   },
-]
+];
