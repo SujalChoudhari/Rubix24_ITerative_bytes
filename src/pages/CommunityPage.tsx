@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PocketBase from 'pocketbase';
 import { usePocket } from '../contexts/PocketContext';
-import { formatDistanceToNow,formatDistanceToNowStrict } from "date-fns";
+import { formatDistanceToNow, formatDistanceToNowStrict } from "date-fns";
 import {
     ChakraProvider,
     Box,
@@ -129,8 +129,8 @@ const CommunityPage = () => {
                                             <Badge colorScheme="teal" ml={2} mr={2}>
                                                 {complaint.complaintType} @ {complaint.orderId}
                                             </Badge>
-                                            
-                                            <Text fontSize="sm" mr={2}>at {formatDistanceToNow(new Date(complaint.created))}</Text>
+
+                                            <Text fontSize="sm" mr={2}>at {formatDistanceToNow(new Date(complaint.created))} ago</Text>
                                         </Flex>
                                         <Text mt={4} textAlign={"left"} fontWeight={300}>Current Progress: {complaint.progress} %</Text>
                                         <Progress borderRadius={10} width={"100%"} value={complaint.progress} />
@@ -171,8 +171,10 @@ const CommunityPage = () => {
                                             borderRadius="lg"
                                             bg={colorMode === 'light' ? 'white' : 'gray.700'}
                                         >
-                                            <Text fontWeight={700}>{msg.user}</Text>
-                                            <Text>{msg.message}</Text>
+                                            <TTS>
+                                                <Text fontWeight={700}>{msg.user}</Text>
+                                                <Text>{msg.message}</Text>
+                                            </TTS>
                                         </Box>
                                     ))}
                                 </Box>
