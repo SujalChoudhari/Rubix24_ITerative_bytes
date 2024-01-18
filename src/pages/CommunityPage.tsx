@@ -89,7 +89,7 @@ const CommunityPage = () => {
 
 
     return (
-        <Flex direction="column" align="center" justify="center" minH="90vh">
+        <Flex  minH={"60vh"} direction="column" align="center" justify="center" minH="90vh">
             <Heading mb={4}>Community Feed</Heading>
             <Stack maxW="800px">
                 <Accordion allowToggle >

@@ -33,7 +33,7 @@ function Complaints() {
 
 
     return (
-        <Flex h="100%" p={8}>
+        <Flex h="100%" minH={"60vh"} p={8}>
             <VStack spacing={4} align="left" width="25%">
                 <Text fontSize="2xl" fontWeight="bold">Compliants</Text>
                 <Divider />
