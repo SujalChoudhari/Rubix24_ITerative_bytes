@@ -26,6 +26,7 @@ const CommunityPage = () => {
     const { user } = usePocket();
     const [complaints, setComplaints] = useState([]);
     const [newComment, setNewComment] = useState('');
+    const [isAnonymous, setIsAnonymous] = useState(false);
 
 
     // you can also fetch all records at once via getFullList
@@ -66,17 +67,25 @@ const CommunityPage = () => {
     };
 
     const handleAddComment = async (complaint) => {
-        let newsgs = complaint.messages
-        if (newsgs) {
-            newsgs.push({ "user": user.name, "message": newComment })
-        }
-        else {
-            newsgs = [{ "user": user.name, "message": newComment }]
-        }
-        const record = await pb.collection('complaints').update(complaint.id, { ...complaint, messages: newsgs });
-        console.log(record)
-        setComplaints(complaints)
+        let newsgs = complaint.messages || [];
+
+        const newMessage = {
+            user: isAnonymous ? "Anonymous" : user.name,
+            message: newComment,
+        };
+
+        newsgs.push(newMessage);
+
+        const updatedComplaint = {
+            ...complaint,
+            messages: newsgs,
+        };
+
+        await pb.collection('complaints').update(complaint.id, updatedComplaint);
+        setComplaints(complaints);
+        setNewComment('');
     };
+
 
 
     return (
@@ -131,6 +140,15 @@ const CommunityPage = () => {
                                     />
                                     <Button colorScheme="teal" size="sm" mt={2} mb={2} disabled={newComment.trim()} onClick={() => { handleAddComment(complaint) }}>
                                         Post Comment
+                                    </Button>
+                                    <Button
+                                        colorScheme={isAnonymous ? "teal" : "red"}
+                                        size="sm"
+                                        ml={4}
+                                        variant="outline"
+                                        onClick={() => setIsAnonymous(!isAnonymous)}
+                                    >
+                                        {isAnonymous ? "Post Anonymously" : "Post with Name"}
                                     </Button>
                                 </Box>
 
