@@ -33,7 +33,10 @@ const RoutesConfig = () => {
           <Route path="/videoCall" element={<VideoCall />} />
           <Route path="/room/:roomId" element={<RoomPage />} />
 
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin_grofers" element={<Admin company='Grofers' />} />
+          <Route path="/admin_bigbasket" element={<Admin company='BigBasket' />} />
+          <Route path="/admin_flipkart" element={<Admin company='Flipkart Fresh' />} />
+          <Route path="/admin" element={<Admin company='Other' />} />
         </Route>
       </Routes>
     </PocketProvider>

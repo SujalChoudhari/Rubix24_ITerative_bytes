@@ -4,7 +4,7 @@ import SupportMeetingCard from '../SupportMeetingCard';
 import PocketBase from 'pocketbase';
 import CompliantEdit from './ComplaintEdit';
 
-function Complaints({ name }: { name: string }) {
+function Complaints({ name, company }: { name: string }) {
     // Sample list of Meet codes
     const [compliants, setCompliants] = useState([])
     const pb = new PocketBase('http://127.0.0.1:8090');
@@ -36,7 +36,7 @@ function Complaints({ name }: { name: string }) {
                 <Divider />
                 <List maxH="300px" overflowY="auto">
                     {compliants.map((meet) => (
-                        meet.status != "Satisfied" && meet.complaintType == name &&
+                        meet.status != "Satisfied" && meet.orderId == company && meet.complaintType == name &&
                         <ListItem key={meet.id} py="12px" >
                             <Button
                                 width="100%"

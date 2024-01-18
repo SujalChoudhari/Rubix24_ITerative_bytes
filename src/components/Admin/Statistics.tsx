@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-const Statistics = () => {
+const Statistics = ({company}) => {
   const tealColor = useColorModeValue('teal.500', 'teal.300');
 
   // Placeholder data for stats

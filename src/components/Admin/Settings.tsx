@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Settings() {
+function Settings({settings}) {
   return (
     <div>Settings</div>
   )

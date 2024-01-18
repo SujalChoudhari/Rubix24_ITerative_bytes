@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChakraProvider, useToast, Flex, Heading, Input, Button, ColorModeScript, useColorMode, FormControl, FormHelperText, FormLabel, Box, useBoolean } from '@chakra-ui/react';
+import { ChakraProvider, useToast, Flex, Heading, Input, Button, ColorModeScript, useColorMode, FormControl, FormHelperText, FormLabel, Box, useBoolean, Progress } from '@chakra-ui/react';
 import PocketBase from 'pocketbase';
 import { Navigate, useNavigate } from 'react-router';
 const pb = new PocketBase('http://127.0.0.1:8090');
@@ -12,6 +12,7 @@ const CompliantEdit = ({ recordId }) => {
         address: '',
         orderId: '',
         complaintType: '',
+        progress: 0
     });
 
     const { colorMode, toggleColorMode } = useColorMode();
@@ -68,6 +69,7 @@ const CompliantEdit = ({ recordId }) => {
     return (
         <Flex direction="column" align="center" justify="center" minH="70vh">
             <Heading mb={4}>Update Complaint</Heading>
+            <Progress value={64} height={"1vh"} />
             <ColorModeScript initialColorMode={colorMode} />
 
             <FormControl mb={3}>
@@ -76,6 +78,14 @@ const CompliantEdit = ({ recordId }) => {
                     <FormHelperText>Username cannot be changed</FormHelperText>
                 </Box>
                 <Input readOnly placeholder="Enter username" name="username" value={formData.username} onChange={handleInputChange} />
+            </FormControl>
+
+            <FormControl mb={3}>
+                <Box display={'inline-block'}>
+                    <FormLabel>Status</FormLabel>
+                    <FormHelperText>Provide the current status</FormHelperText>
+                </Box>
+                <Input placeholder="Enter status" name="status" value={formData.status} onChange={handleInputChange} />
             </FormControl>
 
             <FormControl mb={3}>
@@ -110,13 +120,7 @@ const CompliantEdit = ({ recordId }) => {
                 <Input placeholder="Enter complaint type" name="complaintType" value={formData.complaintType} onChange={handleInputChange} />
             </FormControl>
 
-            <FormControl mb={3}>
-                <Box display={'inline-block'}>
-                    <FormLabel>Status</FormLabel>
-                    <FormHelperText>Provide the current status</FormHelperText>
-                </Box>
-                <Input placeholder="Enter status" name="status" value={formData.status} onChange={handleInputChange} />
-            </FormControl>
+
             <Box>
                 <Button colorScheme="teal" onClick={() => {
                     handleMarkAsSatisfied(); toast({

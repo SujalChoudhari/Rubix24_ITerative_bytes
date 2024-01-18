@@ -23,8 +23,11 @@ const Complaints = () => {
 
   const [formData, setFormData] = useState({
     orderId: '',
-    orderOptions: ['Order #1', 'Order #2', 'Order #3'],
-    complaintOptions: ['Delivery Boy', 'Food Quality', 'Wrong Delivery'],
+    orderOptions: ["Grofers"
+      , "BigBasket"
+      , "FlipkartFresh"
+      , "Other"],
+    complaintOptions: ['Delivery Boy', 'Food Quality', 'Wrong Delivery', 'Other'],
     selectedOrder: '',
     selectedComplaint: '',
     address: '',
@@ -55,8 +58,11 @@ const Complaints = () => {
 
     setFormData({
       orderId: '',
-      orderOptions: ['Order #1', 'Order #2', 'Order #3'],
-      complaintOptions: ['Delivery Boy', 'Food Quality', 'Wrong Delivery'],
+      orderOptions: ["Grofers"
+        , "BigBasket"
+        , "FlipkartFresh"
+        , "Other"],
+      complaintOptions: ['Delivery Boy', 'Food Quality', 'Wrong Delivery', 'Other'],
       selectedOrder: '',
       selectedComplaint: '',
       address: '',
@@ -94,9 +100,10 @@ const Complaints = () => {
         <Box p={8} width={"60vw"}>
           <VStack spacing={4} align="stretch">
             <FormControl>
-              <FormLabel>Order ID</FormLabel>
+              <FormLabel>Platform</FormLabel>
               <Select
-                placeholder="Select Order"
+                isRequired
+                placeholder="Select Platform"
                 value={formData.selectedOrder}
                 onChange={handleOrderChange}
               >
@@ -110,6 +117,7 @@ const Complaints = () => {
             <FormControl>
               <FormLabel>Complaint Type</FormLabel>
               <Select
+                isRequired
                 placeholder="Select Complaint Type"
                 value={formData.selectedComplaint}
                 onChange={handleComplaintChange}
@@ -121,6 +129,18 @@ const Complaints = () => {
                 ))}
               </Select>
             </FormControl>
+
+            <FormControl>
+              <FormLabel>Receipt</FormLabel>
+              <Input
+                type="file"
+                accept="image/*, application/pdf" // Adjust as needed for allowed file types
+                onChange={async (e) => {
+                  setFormData({ ...formData, receipt: e.target.files[0] });
+                }}
+              />
+            </FormControl>
+
             <FormControl>
               <FormLabel>Address</FormLabel>
               <Textarea
@@ -140,21 +160,10 @@ const Complaints = () => {
             <FormControl>
               <FormLabel>Complaint Description</FormLabel>
               <Textarea
+                isRequired
                 placeholder="Enter your complaint description"
                 value={formData.desc}
                 onChange={handleDescriptionChange}
-              />
-            </FormControl>
-
-            <FormControl>
-              <FormLabel>Receipt</FormLabel>
-              <Input
-                type="file"
-                accept="image/*, application/pdf" // Adjust as needed for allowed file types
-                onChange={async(e) => {
-                  setFormData({ ...formData, receipt: e.target.files[0] });
-                  
-                }}
               />
             </FormControl>
 

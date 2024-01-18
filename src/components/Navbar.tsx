@@ -252,14 +252,14 @@ const NAV_ITEMS: Array<NavItem> = [
     label: 'Home',
     href: '/',
   },
-  {
-    label: 'Orders',
-    href: '/orders',
-  },
-  {
-    label: 'Inventory',
-    href: '/inventory',
-  },
+  // {
+  //   label: 'Orders',
+  //   href: '/orders',
+  // },
+  // {
+  //   label: 'Inventory',
+  //   href: '/inventory',
+  // },
   {
     label: 'Complaints',
     href: '/complaints',
