@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PocketBase from 'pocketbase';
 import { usePocket } from '../contexts/PocketContext';
-
+import { formatDistanceToNow,formatDistanceToNowStrict } from "date-fns";
 import {
     ChakraProvider,
     Box,
@@ -18,8 +18,10 @@ import {
     AccordionButton,
     AccordionPanel,
     Textarea,
+    Progress,
 } from '@chakra-ui/react';
 import { FaArrowUp } from 'react-icons/fa';
+import TTS from '../components/TTS';
 
 const CommunityPage = () => {
     const pb = new PocketBase('http://127.0.0.1:8090');
@@ -89,7 +91,7 @@ const CommunityPage = () => {
 
 
     return (
-        <Flex  minH={"60vh"} direction="column" align="center" justify="center" minH="90vh">
+        <Flex minH={"60vh"} direction="column" align="center" justify="center" >
             <Heading mb={4}>Community Feed</Heading>
             <Stack maxW="800px">
                 <Accordion allowToggle >
@@ -97,38 +99,43 @@ const CommunityPage = () => {
                         <AccordionItem>
                             <AccordionButton>
                                 <Box flex='1' as="span" key={complaint.id} borderWidth="1px" mt={4} borderRadius="lg" overflow="hidden" p={4}>
-                                    <Flex justify="space-between">
-                                        <Box>
-                                            <Button
-                                                colorScheme="teal"
-                                                size="sm"
-                                                onClick={() => handleUpvote(complaint.id, complaint.upvotes)}
-                                                disabled={hasUpvoted(complaint.upvotes)}
-                                            >
-                                                <FaArrowUp />
-                                                <Text ml={3} fontSize="sm">
-                                                    {complaint.upvotes.length}
-                                                </Text>
-                                            </Button>
-                                        </Box>
-                                        <Box>
-                                            <Text fontWeight="bold">{complaint.username}</Text>
-                                        </Box>
-                                    </Flex>
-                                    <Text my={6} ml={10} mr={10} textAlign={"left"} color={colorMode === 'light' ? 'gray.600' : 'gray.300'}>
-                                        {complaint.description}
-                                    </Text>
-                                    <Flex align="center" mt={2}>
-                                        <Badge colorScheme="teal" mr={2}>
-                                            {complaint.status}
-                                        </Badge>
-                                        <Text fontSize="sm" mr={2}>{complaint.created}</Text>
-                                        <Badge colorScheme="teal" mr={2}>
-                                            {complaint.complaintType} @ {complaint.orderId}
-                                        </Badge>
-                                    </Flex>
+                                    <TTS>
+                                        <Flex justify="space-between">
+                                            <Box>
+                                                <Button
+                                                    colorScheme="teal"
+                                                    size="sm"
+                                                    onClick={() => handleUpvote(complaint.id, complaint.upvotes)}
+                                                    disabled={hasUpvoted(complaint.upvotes)}
+                                                >
+                                                    <FaArrowUp />
+                                                    <Text ml={3} fontSize="sm">
+                                                        {complaint.upvotes.length}
+                                                    </Text>
+                                                </Button>
+                                            </Box>
+                                            <Box>
+                                                <Text fontWeight="bold">{complaint.username}</Text>
+                                            </Box>
+                                        </Flex>
+                                        <Text my={6} ml={4} mr={10} textAlign={"left"} color={colorMode === 'light' ? 'gray.600' : 'gray.300'}>
+                                            {complaint.description}
+                                        </Text>
+                                        <Flex align="center" mt={2}>
+                                            <Badge colorScheme="teal" mr={2}>
+                                                {complaint.status}
+                                            </Badge>
+                                            by
+                                            <Badge colorScheme="teal" ml={2} mr={2}>
+                                                {complaint.complaintType} @ {complaint.orderId}
+                                            </Badge>
+                                            
+                                            <Text fontSize="sm" mr={2}>at {formatDistanceToNow(new Date(complaint.created))}</Text>
+                                        </Flex>
+                                        <Text mt={4} textAlign={"left"} fontWeight={300}>Current Progress: {complaint.progress} %</Text>
+                                        <Progress borderRadius={10} width={"100%"} value={complaint.progress} />
+                                    </TTS>
                                 </Box>
-
                             </AccordionButton>
                             <AccordionPanel pb={4}>
                                 <Box>

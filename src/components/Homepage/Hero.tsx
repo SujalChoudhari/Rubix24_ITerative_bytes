@@ -16,16 +16,17 @@ import {
 // Here we have used react-icons package for the icons
 import { GoChevronRight } from 'react-icons/go';
 import { MdBolt } from 'react-icons/md';
+import TTS from '../TTS';
 
 const HeroSection = () => {
   return (
     <Container maxW="6xl" px={{ base: 6, md: 3 }} py={24}>
       <Stack direction={{ base: 'column', md: 'row' }} justifyContent="center">
         <Stack direction="column" spacing={6} justifyContent="center" maxW="480px">
-           
-            
+
+
           <chakra.h1 fontSize="5xl" lineHeight={1} fontWeight="bold" textAlign="left">
-          Consumer Complaints<br />
+            Consumer Complaints<br />
             <chakra.span color="#">made easy</chakra.span>
           </chakra.h1>
           <Text
@@ -56,7 +57,7 @@ const HeroSection = () => {
               _hover={{ bgGradient: 'linear(to-l, #0ea5e9,#2563eb)', opacity: 0.9 }}
             >
               <chakra.span> Get Started </chakra.span>
-              
+
             </chakra.button>
             <Box
               d="flex"
@@ -79,14 +80,14 @@ const HeroSection = () => {
         <Box ml={{ base: 0, md: 5 }} pos="relative">
           <DottedBox />
           <Image
-    w="100%"
-    h="100%"
-    minW={{ base: 'auto', md: '30rem' }}
-    objectFit="cover"
-    src={`https://img.freepik.com/free-vector/customer-help-support-service-background-vector-doodle-illustration-call-center-hotline-with-girl-operator-headset-laptop-message-with-question-lifebuoy-gears_107791-11023.jpg?w=1380&t=st=1705579695~exp=1705580295~hmac=ee1793edc4682106693e94503159a8ddd35eedce3562fee00be15d998b373ef2`}
-    rounded="md"
-    fallback={<Skeleton />}
-  />
+            w="100%"
+            h="100%"
+            minW={{ base: 'auto', md: '30rem' }}
+            objectFit="cover"
+            src={`https://img.freepik.com/free-vector/customer-help-support-service-background-vector-doodle-illustration-call-center-hotline-with-girl-operator-headset-laptop-message-with-question-lifebuoy-gears_107791-11023.jpg?w=1380&t=st=1705579695~exp=1705580295~hmac=ee1793edc4682106693e94503159a8ddd35eedce3562fee00be15d998b373ef2`}
+            rounded="md"
+            fallback={<Skeleton />}
+          />
         </Box>
       </Stack>
     </Container>

@@ -17,8 +17,9 @@ function Complaints({ name, company }: { name: string }) {
             });
             setCompliants(records);
         }
-
         fetchMeetCodes();
+
+        console.log(compliants,name,company)
     }, []);
 
     const [selectedComplaintID, setselectedComplaintID] = useState(null);
