@@ -38,7 +38,7 @@ function SupportChatRoom() {
                             <Button
                                 width="100%"
                                 variant={selectedCode === meet.code ? 'solid' : 'outline'}
-                                colorScheme="teal"
+                                colorScheme="blue"
                                 onClick={() => handleCodeSelection(meet.code)}
                             >
                                 {meet.code}

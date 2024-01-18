@@ -129,9 +129,9 @@ const CompliantEdit = ({ recordId }) => {
                 </Box>
             </FormControl>
 
-            <FormControl mb={5} mt={5} color={"teal"}>
+            <FormControl mb={5} mt={5} color={"blue"}>
                 <Box display={'inline-block'}>
-                    <Button colorScheme='teal' variant={"ghost"}>
+                    <Button colorScheme='blue' variant={"ghost"}>
                         <rrd.Link to={`http://127.0.0.1:8090/api/files/complaints/${recordId}/${formData.receipt}`}>
                             <Link>Download Receipt</Link>
                         </rrd.Link>
@@ -193,7 +193,7 @@ const CompliantEdit = ({ recordId }) => {
 
 
             <Box>
-                <Button colorScheme="teal" onClick={() => {
+                <Button colorScheme="blue" onClick={() => {
                     handleMarkAsSatisfied(); toast({
                         title: 'Hurray!',
                         description: "One More satisfied Customer!",
@@ -204,7 +204,7 @@ const CompliantEdit = ({ recordId }) => {
                 }}>
                     Mark as Satisfied
                 </Button>
-                <Button colorScheme="teal" variant={"ghost"} onClick={() => {
+                <Button colorScheme="blue" variant={"ghost"} onClick={() => {
                     handleUpdateRecord(); toast({
                         title: 'Saved Successfully.',
                         description: "We've saved the data",

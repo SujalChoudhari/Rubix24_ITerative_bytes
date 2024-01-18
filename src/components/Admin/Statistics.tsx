@@ -13,7 +13,7 @@ import {
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 const Statistics = ({company}) => {
-  const tealColor = useColorModeValue('teal.500', 'teal.300');
+  const blueColor = useColorModeValue('blue.500', 'blue.300');
 
   // Placeholder data for stats
   const statsData = [
@@ -36,21 +36,21 @@ const Statistics = ({company}) => {
 
   return (
     <Box p={4}>
-      <Heading mb={4} size="lg" textAlign="center" color={tealColor}>
+      <Heading mb={4} size="lg" textAlign="center" color={blueColor}>
         Complaint Tracking Stats
       </Heading>
       <Grid templateColumns="repeat(2, 1fr)" gap={4}>
         {statsData.map((stat, index) => (
           <GridItem key={index}>
             <Stat p={4} borderRadius="md" bg={useColorModeValue('white', 'gray.800')} boxShadow="md">
-              <StatLabel color={tealColor}>{stat.label}</StatLabel>
+              <StatLabel color={blueColor}>{stat.label}</StatLabel>
               <StatNumber>{stat.value}</StatNumber>
             </Stat>
           </GridItem>
         ))}
       </Grid>
       <Box mt={8}>
-        <Text textAlign="center" color={tealColor} mb={4}>
+        <Text textAlign="center" color={blueColor} mb={4}>
           Complaints Over Time
         </Text>
         
@@ -60,7 +60,7 @@ const Statistics = ({company}) => {
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="complaints" dot={{r:8}} stroke={tealColor} activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="complaints" dot={{r:8}} stroke={blueColor} activeDot={{ r: 8 }} />
         </LineChart>
 
         {/* Add more charts */}

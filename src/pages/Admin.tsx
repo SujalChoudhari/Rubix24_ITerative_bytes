@@ -49,7 +49,7 @@ const Admin = ({ company }: { company: string }) => {
         <>
             <Flex minH="100vh">
                 {/* Sidebar */}
-                <Box w="250px" bg={useColorModeValue('teal.500', 'teal.800')} p={4} color="white">
+                <Box w="250px" bg={useColorModeValue('blue.500', 'blue.800')} p={4} color="white">
                     <VStack spacing={4} align="left">
                         <Text fontSize="2xl">Admin ({company})</Text>
 
