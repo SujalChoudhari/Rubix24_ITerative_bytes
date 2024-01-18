@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ChakraProvider, useToast, Flex, Heading, Input, Button, ColorModeScript, useColorMode, FormControl, FormHelperText, FormLabel, Box, useBoolean, Progress, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack } from '@chakra-ui/react';
+import { ChakraProvider, useToast, Flex, Heading, Input, Link, Button, ColorModeScript, useColorMode, FormControl, FormHelperText, FormLabel, Box, useBoolean, Progress, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack } from '@chakra-ui/react';
 import PocketBase from 'pocketbase';
 import { Navigate, useNavigate } from 'react-router';
+import * as rrd from 'react-router-dom';
 const pb = new PocketBase('http://127.0.0.1:8090');
 
 const CompliantEdit = ({ recordId }) => {
@@ -11,12 +12,13 @@ const CompliantEdit = ({ recordId }) => {
         status: '',
         address: '',
         orderId: '',
+        receipt: null,
         complaintType: '',
         progress: 0
     });
 
     const { colorMode, toggleColorMode } = useColorMode();
-    const navigate = useNavigate();
+    const navigate = rrd.useNavigate();
     const toast = useToast()
 
     const [unsavedChanges, setUnsavedChanges] = useState(false)
@@ -30,6 +32,8 @@ const CompliantEdit = ({ recordId }) => {
             } catch (error) {
                 console.error('Error fetching record data:', error);
             }
+
+            console.log(formData.receipt);
         };
 
 
@@ -125,6 +129,17 @@ const CompliantEdit = ({ recordId }) => {
                 </Box>
             </FormControl>
 
+            <FormControl mb={5} mt={5} color={"teal"}>
+                <Box display={'inline-block'}>
+                    <Button colorScheme='teal' variant={"ghost"}>
+                        <rrd.Link to={`http://127.0.0.1:8090/api/files/complaints/${recordId}/${formData.receipt}`}>
+                            <Link>Download Receipt</Link>
+                        </rrd.Link>
+                    </Button>
+                </Box>
+
+            </FormControl>
+
             <FormControl mb={3}>
                 <Box display={'inline-block'}>
                     <FormLabel>Username</FormLabel>
@@ -132,6 +147,9 @@ const CompliantEdit = ({ recordId }) => {
                 </Box>
                 <Input readOnly placeholder="Enter username" name="username" value={formData.username} onChange={handleInputChange} />
             </FormControl>
+
+
+
 
             <FormControl mb={3}>
                 <Box display={'inline-block'}>

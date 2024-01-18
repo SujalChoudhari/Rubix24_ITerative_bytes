@@ -90,6 +90,8 @@ const CommunityPage = () => {
                                 {complaint.status}
                             </Badge>
                             <Text fontSize="sm">{complaint.created}</Text>
+
+                            <Text fontSize="sm">{complaint.orderId}</Text>
                         </Flex>
                     </Box>
                 ))}
