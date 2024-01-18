@@ -12,8 +12,7 @@ dist
 dist-ssr
 *.local
 */pocketbase.*
-*/pb_data
-*/pb_migrations/
+
 
 # Editor directories and files
 .vscode/*

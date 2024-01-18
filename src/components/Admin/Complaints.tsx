@@ -4,11 +4,10 @@ import SupportMeetingCard from '../SupportMeetingCard';
 import PocketBase from 'pocketbase';
 import CompliantEdit from './ComplaintEdit';
 
-function Complaints() {
+function Complaints({ name }: { name: string }) {
     // Sample list of Meet codes
     const [compliants, setCompliants] = useState([])
     const pb = new PocketBase('http://127.0.0.1:8090');
-
 
     useEffect(() => {
         // you can also fetch all records at once via getFullList
@@ -16,7 +15,6 @@ function Complaints() {
             const records = await pb.collection('complaints').getFullList({
                 sort: '-created',
             });
-            console.log(records)
             setCompliants(records);
         }
 
@@ -34,11 +32,11 @@ function Complaints() {
     return (
         <Flex h="100%" p={8}>
             <VStack spacing={4} align="left" width="25%">
-                <Text fontSize="2xl" fontWeight="bold">Compliants</Text>
+                <Text fontSize="2xl" fontWeight="bold">{name}</Text>
                 <Divider />
                 <List maxH="300px" overflowY="auto">
                     {compliants.map((meet) => (
-                        meet.status != "Satisfied" &&
+                        meet.status != "Satisfied" && meet.complaintType == name &&
                         <ListItem key={meet.id} py="12px" >
                             <Button
                                 width="100%"

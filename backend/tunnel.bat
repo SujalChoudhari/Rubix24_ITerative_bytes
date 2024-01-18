@@ -1,0 +1,1 @@
+start cmd /k "ngrok http --domain=raccoon-calm-loudly.ngrok-free.app 8090"

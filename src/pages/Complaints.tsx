@@ -10,6 +10,7 @@ import {
   VStack,
   Switch,
   Center,
+  Input,
 } from '@chakra-ui/react';
 import PocketBase from 'pocketbase';
 import { useNavigate } from 'react-router';
@@ -23,43 +24,46 @@ const Complaints = () => {
   const [formData, setFormData] = useState({
     orderId: '',
     orderOptions: ['Order #1', 'Order #2', 'Order #3'],
-    complaintOptions: ['Dilevery Boy', 'Food Quality', 'Wrong Dilevery'],
+    complaintOptions: ['Delivery Boy', 'Food Quality', 'Wrong Delivery'],
     selectedOrder: '',
     selectedComplaint: '',
     address: '',
     desc: '',
-    isAnonymous: false
+    receipt: null, // New field for receipt
+    isAnonymous: false,
   });
 
   const navigate = useNavigate();
 
   const data = {
-    "username": formData.isAnonymous ? "Anonymous" : user.name,
-    "description": formData.desc,
-    "status": "Processing Started",
-    "address": formData.address,
-    "orderId": formData.selectedOrder,
-    "complaintType": formData.selectedComplaint,
-    "userId": user.id
+    username: formData.isAnonymous ? 'Anonymous' : user.name,
+    description: formData.desc,
+    status: 'Processing Started',
+    address: formData.address,
+    orderId: formData.selectedOrder,
+    complaintType: formData.selectedComplaint,
+    userId: user.id,
+    receipt: formData.receipt, // Include receipt in the data object
   };
 
   const handleSubmit = () => {
     console.log('Form submitted:', formData);
     const saveToDB = async () => {
       const record = await pb.collection('complaints').create(data);
-    }
-    saveToDB()
+    };
+    saveToDB();
 
     setFormData({
       orderId: '',
       orderOptions: ['Order #1', 'Order #2', 'Order #3'],
-      complaintOptions: ['Dilevery Boy', 'Food Quality', 'Wrong Dilevery'],
+      complaintOptions: ['Delivery Boy', 'Food Quality', 'Wrong Delivery'],
       selectedOrder: '',
       selectedComplaint: '',
       address: '',
       desc: '',
-      isAnonymous: false
-    })
+      receipt: null, // Reset receipt field
+      isAnonymous: false,
+    });
   };
 
   const handleOrderChange = (e) => {
@@ -139,6 +143,18 @@ const Complaints = () => {
                 placeholder="Enter your complaint description"
                 value={formData.desc}
                 onChange={handleDescriptionChange}
+              />
+            </FormControl>
+
+            <FormControl>
+              <FormLabel>Receipt</FormLabel>
+              <Input
+                type="file"
+                accept="image/*, application/pdf" // Adjust as needed for allowed file types
+                onChange={async(e) => {
+                  setFormData({ ...formData, receipt: e.target.files[0] });
+                  
+                }}
               />
             </FormControl>
 

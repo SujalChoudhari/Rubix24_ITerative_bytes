@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router';
 import { Box, Flex, Spacer, VStack, Text, Container, IconButton, useColorMode, useColorModeValue, Button, Icon } from '@chakra-ui/react';
-import { FaSun, FaMoon, FaComments, FaChartBar, FaExclamationCircle, FaCog } from 'react-icons/fa';
+import { FaSun, FaMoon, FaComments, FaChartBar, FaExclamationCircle, FaCog, FaBiking, FaIceCream, FaAngry } from 'react-icons/fa';
 import SupportChatRoom from '../components/Admin/SupportChatRoom';
 import Complaints from '../components/Admin/Complaints';
 import Settings from '../components/Admin/Settings';
@@ -17,9 +17,17 @@ const Admin = () => {
             title: "Support Chat Room",
             identifier: <SupportChatRoom />
         }, {
-            icon: <FaExclamationCircle />,
-            title: "Complaints",
-            identifier: <Complaints />
+            icon: <FaBiking />,
+            title: "Delivery Boy",
+            identifier: <Complaints name='Delivery Boy' />
+        }, {
+            icon: <FaIceCream />,
+            title: "Food Quality",
+            identifier: <Complaints name='Food Quality' />
+        }, {
+            icon: <FaAngry />,
+            title: "Wrong Delivery",
+            identifier: <Complaints name='Wrong Delivery' />
         }, {
             icon: <FaChartBar />,
             title: "Statistics",
@@ -31,7 +39,7 @@ const Admin = () => {
             identifier: <Settings />
         },
     ]
-    
+
 
     return (
         <>
