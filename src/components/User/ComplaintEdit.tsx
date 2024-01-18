@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChakraProvider, useToast, Flex, Heading, Input, Button, ColorModeScript, useColorMode, FormControl, FormHelperText, FormLabel, Box, useBoolean, Select, Progress, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack } from '@chakra-ui/react';
+import { ChakraProvider, useToast, Flex, Heading, Input, Button, ColorModeScript, useColorMode, FormControl, FormHelperText, FormLabel, Box, useBoolean, Select, Progress, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Textarea } from '@chakra-ui/react';
 import PocketBase from 'pocketbase';
 import { Navigate, useNavigate } from 'react-router';
 
@@ -113,7 +113,7 @@ const CompliantEdit = ({ recordId }) => {
                     <FormLabel>Description</FormLabel>
                     <FormHelperText>Description cannot be changed</FormHelperText>
                 </Box>
-                <Input placeholder="Enter description" name="description" value={formData.description} onChange={handleInputChange} />
+                <Textarea placeholder="Enter description" name="description" value={formData.description} onChange={handleInputChange} />
             </FormControl>
 
             <FormControl mb={3}>

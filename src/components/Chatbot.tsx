@@ -43,19 +43,33 @@ const Chatbot = () => {
         steps={[
             {
                 id: '1',
-                message: 'Hello! I am Arzi, your Complaint Tracking Assistant. What is your name?',
+                message: 'Hello! I am Arzi, your Complaint Tracking Assistant. How can I assist you?',
                 trigger: '2',
             },
             {
                 id: '2',
-                user: true,
-                trigger: '3',
+                options: [
+                    { value: 1, label: "Need Help", trigger: 3 },
+                    { value: 2, label: "Join Arzi", trigger: 4 },
+                    { value: 3, label: "Explore", trigger: 5 },
+                ]
             },
             {
                 id: '3',
-                message: `Hi {previousValue}! Welcome to Arzi. How can I assist you today?`,
+                message: `We are always ready to help you! Open Support page`,
                 end: true
             },
+            {
+                id: '4',
+                message: `You can join via Signing In.`,
+                end: true
+            },
+            {
+                id: '5',
+                message: `Explore the Homepage of the Website for Features`,
+                end: true
+            },
+
         ]}
         handleEnd={handleEnd} />;
 };
