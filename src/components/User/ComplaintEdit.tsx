@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChakraProvider, useToast, Flex, Heading, Input, Button, ColorModeScript, useColorMode, FormControl, FormHelperText, FormLabel, Box, useBoolean } from '@chakra-ui/react';
+import { ChakraProvider, useToast, Flex, Heading, Input, Button, ColorModeScript, useColorMode, FormControl, FormHelperText, FormLabel, Box, useBoolean, Select } from '@chakra-ui/react';
 import PocketBase from 'pocketbase';
 import { Navigate, useNavigate } from 'react-router';
 const pb = new PocketBase('http://127.0.0.1:8090');
@@ -72,34 +72,32 @@ const CompliantEdit = ({ recordId }) => {
 
             <FormControl mb={3}>
                 <Box display={'inline-block'}>
-                    <FormLabel>Username</FormLabel>
-                    <FormHelperText>Username cannot be changed</FormHelperText>
-                </Box>
-                <Input readOnly placeholder="Enter username" name="username" value={formData.username} onChange={handleInputChange} />
-            </FormControl>
-
-            <FormControl mb={3}>
-                <Box display={'inline-block'}>
                     <FormLabel>Description</FormLabel>
                     <FormHelperText>Description cannot be changed</FormHelperText>
                 </Box>
-                <Input readOnly placeholder="Enter description" name="description" value={formData.description} onChange={handleInputChange} />
+                <Input placeholder="Enter description" name="description" value={formData.description} onChange={handleInputChange} />
             </FormControl>
 
             <FormControl mb={3}>
                 <Box display={'inline-block'}>
                     <FormLabel>Address</FormLabel>
-                    <FormHelperText>Address cannot be changed</FormHelperText>
+                    <FormHelperText>Update address to current address </FormHelperText>
                 </Box>
                 <Input readOnly placeholder="Enter address" name="address" value={formData.address} onChange={handleInputChange} />
             </FormControl>
 
             <FormControl mb={3}>
                 <Box display={'inline-block'}>
-                    <FormLabel>Order ID</FormLabel>
-                    <FormHelperText>Provide the order ID</FormHelperText>
+                    <FormLabel>Company</FormLabel>
+                    <FormHelperText>Update the company</FormHelperText>
                 </Box>
-                <Input placeholder="Enter order ID" name="orderId" value={formData.orderId} onChange={handleInputChange} />
+                <Select name="orderId" placeholder={formData.orderId} value={formData.orderId} onChange={handleInputChange}>
+                    <option value={'Grofers'}> Grofers </option>
+                    <option value={'BigBasket'}> BigBasket </option>
+                    <option value={'FlipkartFresh'}> Flipkart Fresh </option>
+                    <option value={'Other'}> Other </option>
+                </Select>
+                {/* <Input placeholder="Enter order ID" name="orderId" value={formData.orderId} onChange={handleInputChange} /> */}
             </FormControl>
 
             <FormControl mb={3}>

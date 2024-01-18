@@ -15,10 +15,6 @@ import {
 } from '@chakra-ui/react';
 import { FaArrowUp } from 'react-icons/fa';
 
-// Sample data
-
-
-
 const CommunityPage = () => {
     const pb = new PocketBase('http://127.0.0.1:8090');
     const { user } = usePocket();
