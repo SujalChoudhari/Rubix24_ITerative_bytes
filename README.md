@@ -4,6 +4,11 @@
 
 Welcome to Arzi, the revolutionary Complaint Solution System made for Rubix Hackathon 24. This platform is designed to empower your consumer voice, offering a seamless experience to register, track, and resolve complaints efficiently. Built with a user-friendly interface and a commitment to quick resolution, Arzi ensures a hassle-free experience for users.
 
+
+
+https://github.com/SujalChoudhari/Rubix24_ITerative_bytes/assets/85174767/b1428054-8040-439d-8197-8f6f2e073123
+
+
 ## Getting Started
 
 ### Create an Account
