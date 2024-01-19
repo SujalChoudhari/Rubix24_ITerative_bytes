@@ -64,7 +64,7 @@ Let's work together to make consumer complaints more efficient and empower your 
 
 1. **Clone the Repository:**
    ```bash
-   git clone [repository_url]
+   git clone https://github.com/SujalChoudhari/Rubix24_ITerative_bytes.git
    ```
 
 2. **Navigate to the Web Branch:**
@@ -74,7 +74,6 @@ Let's work together to make consumer complaints more efficient and empower your 
 
 3. **Install Dependencies:**
    ```bash
-   cd frontend
    npm install
    ```
 
@@ -87,9 +86,10 @@ Let's work together to make consumer complaints more efficient and empower your 
 5. **Download and Run PocketBase Backend:**
    - Go to [pocketbase.io](https://pocketbase.io).
    - Download the executable for your platform.
-   - Place the executable under the backend folder.
+   - Place the executable under the `backend` folder.
    - Run the executable as follows:
      ```bash
+      cd backend
      ./pocketbase serve
      ```
 
@@ -103,12 +103,6 @@ Let's work together to make consumer complaints more efficient and empower your 
    git checkout ml
    ```
 
-2. **Install ML Dependencies:**
-   Navigate to the backend folder.
-   ```bash
-   cd backend
-   ```
-
 3. **Access the ML Models:**
    The ML models are now ready for use.
 
@@ -120,4 +114,4 @@ Arzi is a collaborative effort by the following authors:
 - Yaksh Darji
 - Mihir Panchal
 
-Feel free to reach out to them for any inquiries or contributions. Happy coding with Arzi!
+Feel free to reach out to us for any inquiries or contributions. Happy coding with Arzi!
