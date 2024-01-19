@@ -113,17 +113,21 @@ import { motion, useAnimation } from 'framer-motion';
 import { Flex, Box, FormControl, FormLabel, Input, Checkbox, Stack, Button, Link, Heading, Text, useColorModeValue, Image } from '@chakra-ui/react';
 import * as rrd from 'react-router-dom';
 import yourImage from '../assets/hero2.png';
+import { usePocket } from "../contexts/PocketContext";
 
 export default function SignIn() {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const navigate = rrd.useNavigate();
+
   const controls = useAnimation();
+  const { login } = usePocket();
 
   const handleOnSubmit = useCallback(
     async () => {
       // Your login logic here
-      // await login(emailRef.current.value, passwordRef.current.value);
-      // navigate("/");
+      await login(emailRef.current.value, passwordRef.current.value);
+      navigate("/");
     },
     [] // Removed login dependency
   );
