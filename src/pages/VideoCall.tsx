@@ -13,7 +13,7 @@ const VideoCall = () => {
         >
             <Container maxW="xl">
                 <VStack align="center" py={8}>
-                    <Heading fontSize="4xl" mb={4} color={useColorModeValue('teal.600', 'teal.300')}>
+                    <Heading fontSize="4xl" mb={4} color={useColorModeValue('blue.600', 'blue.300')}>
                         Welcome to Arzi Support
                     </Heading>
                     <Text fontSize="lg" textAlign="center" color={useColorModeValue('gray.600', 'gray.400')}>

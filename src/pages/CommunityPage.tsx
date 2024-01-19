@@ -103,7 +103,7 @@ const CommunityPage = () => {
                                         <Flex justify="space-between">
                                             <Box>
                                                 <Button
-                                                    colorScheme="teal"
+                                                    colorScheme="blue"
                                                     size="sm"
                                                     onClick={() => handleUpvote(complaint.id, complaint.upvotes)}
                                                     disabled={hasUpvoted(complaint.upvotes)}
@@ -122,11 +122,11 @@ const CommunityPage = () => {
                                             {complaint.description}
                                         </Text>
                                         <Flex align="center" mt={2}>
-                                            <Badge colorScheme="teal" mr={2}>
+                                            <Badge colorScheme="blue" mr={2}>
                                                 {complaint.status}
                                             </Badge>
                                             by
-                                            <Badge colorScheme="teal" ml={2} mr={2}>
+                                            <Badge colorScheme="blue" ml={2} mr={2}>
                                                 {complaint.complaintType} @ {complaint.orderId}
                                             </Badge>
 
@@ -145,11 +145,11 @@ const CommunityPage = () => {
                                         onChange={(e) => setNewComment(e.target.value)}
                                         size="sm"
                                     />
-                                    <Button colorScheme="teal" size="sm" mt={2} mb={2} disabled={newComment.trim()} onClick={() => { handleAddComment(complaint) }}>
+                                    <Button colorScheme="blue" size="sm" mt={2} mb={2} disabled={newComment.trim()} onClick={() => { handleAddComment(complaint) }}>
                                         Post Comment
                                     </Button>
                                     <Button
-                                        colorScheme={isAnonymous ? "teal" : "red"}
+                                        colorScheme={isAnonymous ? "blue" : "red"}
                                         size="sm"
                                         ml={4}
                                         variant="outline"

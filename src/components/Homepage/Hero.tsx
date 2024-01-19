@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {
   chakra,
   Container,
@@ -6,49 +6,81 @@ import {
   HStack,
   Text,
   useColorModeValue,
-  Button,
-  Image,
-  Skeleton,
   Box,
   Link,
-  Icon
+  Image,
+  Skeleton,
+  Show,
 } from '@chakra-ui/react';
-// Here we have used react-icons package for the icons
-import { GoChevronRight } from 'react-icons/go';
-import { MdBolt } from 'react-icons/md';
-import TTS from '../TTS';
+import { TypeAnimation } from 'react-type-animation';
+import { motion } from 'framer-motion';
 
 const HeroSection = () => {
+  const transition = {
+    duration: 0.5,
+    ease: 'easeInOut',
+  };
+
   return (
     <Container maxW="6xl" px={{ base: 6, md: 3 }} py={24}>
       <Stack direction={{ base: 'column', md: 'row' }} justifyContent="center">
         <Stack direction="column" spacing={6} justifyContent="center" maxW="480px">
-
-
-          <chakra.h1 fontSize="5xl" lineHeight={1} fontWeight="bold" textAlign="left">
-            Consumer Complaints<br />
-            <chakra.span color="#">made easy</chakra.span>
-          </chakra.h1>
-          <Text
-            fontSize="1.2rem"
-            textAlign="left"
-            lineHeight="1.375"
-            fontWeight="400"
-            color="gray.500"
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            transition={transition}
+            
           >
-            Empower Your Consumer Voice: Introducing a Revolutionary Complaint Solution System. Register, Track, and Resolve with Confidence - Your Complaints, Your Rights, Your Trust.
-          </Text>
+            {/*}
+            <Typist startDelay={500} cursor={{ show: false }}>
+             
+            </Typist>*/}
+ <chakra.h1 fontSize="5xl" lineHeight={1} fontWeight="bold" textAlign="left">
+                Consumer Complaints<br />
+               
+              </chakra.h1>
+            <TypeAnimation 
+            sequence={[
+              
+              // Same substring at the start will only be typed out once, initially
+              ' Made Easy & Simple',
+              5000, // wait 1s before replacing "Mice" with "Hamsters"
+              ' Made More Efficient',
+              3000,
+              ' Have Community',
+              3000
+            ]}
+            wrapper="span"
+            speed={50}
+            style={{ fontSize: '2em', display: 'inline-block' }}
+            repeat={Infinity}
+            cursor={false}
+            />
+            <Text
+              fontSize="1.2rem"
+              textAlign="left"
+              lineHeight="1.375"
+              fontWeight="400"
+              color="gray.500"
+              mt={4}
+            >
+              Empower Your Consumer Voice: Introducing a Revolutionary Complaint Solution System. Register, Track, and Resolve with Confidence - Your Complaints, Your Rights, Your Trust.
+            </Text>
+          
           <HStack
-            spacing={{ base: 0, sm: 2 }}
-            mb={{ base: '3rem !important', sm: 0 }}
+            spacing={{ base: 10, sm: 2 }}
+            mb={6} // Adjust the value to set the desired space
+            mt={6}
             flexWrap="wrap"
           >
+    
             <chakra.button
               w={{ base: '100%', sm: 'auto' }}
               h={12}
-              px={6}
+              px={8}
               color="white"
-              size="lg"
+            
               rounded="md"
               mb={{ base: 2, sm: 0 }}
               zIndex={5}
@@ -57,10 +89,10 @@ const HeroSection = () => {
               _hover={{ bgGradient: 'linear(to-l, #0ea5e9,#2563eb)', opacity: 0.9 }}
             >
               <chakra.span> Get Started </chakra.span>
-
             </chakra.button>
+            {/* Learn More box without modification */}
             <Box
-              d="flex"
+              
               justifyContent="center"
               bg={useColorModeValue('white', 'gray.800')}
               w={{ base: '100%', sm: 'auto' }}
@@ -76,18 +108,31 @@ const HeroSection = () => {
               Learn  More
             </Box>
           </HStack>
+          </motion.div> 
         </Stack>
+        {/* Dotted element without modification */}
         <Box ml={{ base: 0, md: 5 }} pos="relative">
           <DottedBox />
-          <Image
-            w="100%"
-            h="100%"
-            minW={{ base: 'auto', md: '30rem' }}
-            objectFit="cover"
-            src={`https://img.freepik.com/free-vector/customer-help-support-service-background-vector-doodle-illustration-call-center-hotline-with-girl-operator-headset-laptop-message-with-question-lifebuoy-gears_107791-11023.jpg?w=1380&t=st=1705579695~exp=1705580295~hmac=ee1793edc4682106693e94503159a8ddd35eedce3562fee00be15d998b373ef2`}
-            rounded="md"
-            fallback={<Skeleton />}
-          />
+          
+          <motion.div 
+          initial={{ opacity: 0, y: -50 }}
+         
+          exit={{ opacity: 0, y: 50 }}
+          transition={transition}
+          animate={{ opacity: 1, y: 0, transition: { ...transition, delay: 0.3 } }}
+          >
+            <Image
+  w="100%"
+  maxH="500px"  // Set the maximum height as needed
+  minW={{ base: 'auto', md: '30rem' }}
+  objectFit="cover"
+  src={`https://img.freepik.com/free-vector/customer-help-support-service-background-vector-doodle-illustration-call-center-hotline-with-girl-operator-headset-laptop-message-with-question-lifebuoy-gears_107791-11023.jpg?w=1380&t=st=1705579695~exp=1705580295~hmac=ee1793edc4682106693e94503159a8ddd35eedce3562fee00be15d998b373ef2`}
+  rounded="md"
+  fallback={<Skeleton />}
+/>
+
+
+          </motion.div>
         </Box>
       </Stack>
     </Container>

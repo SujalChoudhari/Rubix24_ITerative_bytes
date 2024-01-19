@@ -1,17 +1,4 @@
-{/*import { Box, Flex, Text } from '@chakra-ui/react';
 
-const Footer = () => {
-    return (
-        <Box bg="teal.500" p={4} color="white">
-            <Flex justifyContent="center" alignItems="center">
-                <Text fontSize="md">© 2024 Arzi. All rights reserved.</Text>
-            </Flex>
-        </Box>
-    );
-};
-
-export default Footer;
-*/}
 import {
     Box,
     Stack,
@@ -35,7 +22,15 @@ import {
   
   const Footer = () => {
     return (
-      <Box p={{ base: 5, md: 8 }} maxW="5xl" marginInline="auto">
+      <Box
+      p={{ base: 5, md: 8 }}
+      maxW="5xl"
+      marginInline="auto"
+      borderTop="2px"
+      borderColor="gray.200"
+      width="100%"
+    >
+      
         <Stack
           spacing={{ base: 8, md: 0 }}
           justifyContent="space-between"
@@ -66,19 +61,20 @@ import {
 
           <HStack
             spacing={4}
-            d={{ base: 'none', sm: 'flex' }}
+           
             justifyContent={{ sm: 'space-between', md: 'normal' }}
           >
             <VStack spacing={4} alignItems="flex-start">
-              <Text fontSize="md" fontWeight="bold">
+              <Text fontSize="md" fontWeight="bold" >
+                
                Home
               </Text>
               <VStack spacing={2} alignItems="flex-start" color="gray.500">
                 
-                <CustomLink>Complaints</CustomLink>
-                <CustomLink>Track Complaint</CustomLink>
-                <CustomLink>Community</CustomLink>
-                <CustomLink>Support</CustomLink>
+                <CustomLink href={'/complaints'}>Complaints</CustomLink>
+                <CustomLink href={'/track'}>Track Complaint</CustomLink>
+                <CustomLink href={'/community'}>Community</CustomLink>
+                <CustomLink href={'/videocall'}>Support</CustomLink>
               </VStack>
             </VStack>
             <VStack spacing={4} alignItems="flex-start">
@@ -86,11 +82,11 @@ import {
                 Community
               </Text>
               <VStack spacing={2} alignItems="flex-start" color="gray.500">
-                <CustomLink>Chat </CustomLink>
+                <CustomLink href={'/community'}>Chat </CustomLink>
                 
-                <CustomLink>Help</CustomLink>
-                <CustomLink>Sign Up</CustomLink>
-                <CustomLink>SignIn</CustomLink>
+                <CustomLink href={'#'}>Help</CustomLink>
+                <CustomLink href={'/signin'}>Sign Up</CustomLink>
+                <CustomLink href={'/signup'}>SignIn</CustomLink>
               </VStack>
             </VStack>
             

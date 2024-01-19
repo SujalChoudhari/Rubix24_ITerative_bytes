@@ -1,43 +1,56 @@
-import React, { SVGProps } from 'react';
-import {
-  Container,
-  Box,
-  chakra,
-  Text,
-  SimpleGrid,
-  Flex,
-  Link,
-  useColorModeValue,
-  Icon
-  
-} from '@chakra-ui/react';
-import {RepeatIcon,QuestionIcon} from '@chakra-ui/icons';
+import React, { useEffect, useState } from 'react';
+import { Container, Box, chakra, Text, SimpleGrid, Flex, useColorModeValue } from '@chakra-ui/react';
+import { RepeatIcon, QuestionIcon } from '@chakra-ui/icons';
 import { MdOutlinePersonPin } from 'react-icons/md';
+
+
+
+
+
+
+
 interface IFeature {
   heading: string;
   content: string;
   icon: React.ReactElement;
 }
 
-export const Slider: IFeature[] = [
+const Slider: IFeature[] = [
   {
     heading: 'Ask Community',
-    content: 'Ask question,post tips and even answer each others,questions through community forums.',
+    content: 'Ask questions, post tips, and even answer each other\'s questions through community forums.',
     icon: <MdOutlinePersonPin size={36} />,
   },
   {
     heading: 'Complaint Status',
     content: 'Our user-friendly platform allows you to effortlessly check the status of your submitted complaints.',
-    icon:<RepeatIcon w={8} h={8}  />
+    icon: <RepeatIcon w={8} h={8} />,
   },
   {
     heading: 'Help',
     content: 'Effortlessly track the status of your support tickets and receive timely updates. ',
-    icon:<QuestionIcon w={10} h={9} />
+    icon: <QuestionIcon w={10} h={9} />,
   },
 ];
 
 const Slide = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const threshold = 300;
+
+      setIsVisible(scrollPosition > threshold);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <Container maxW="6xl" p={{ base: 5, md: 10 }}>
       <chakra.h3 fontSize="4xl" fontWeight="bold" mb={20} textAlign="center">
@@ -51,7 +64,11 @@ const Slide = () => {
             p={6}
             rounded="lg"
             textAlign="center"
-            position="relative"
+            style={{
+              opacity: isVisible ? 1 : 0.2,
+              transform: isVisible ? 'translateY(0)' : 'translateY(-10px)',
+              transition: 'opacity 0.5s ease-in-out, transform 0.5s ease-in-out',
+            }}
           >
             <Flex
               p={2}
@@ -60,10 +77,6 @@ const Slide = () => {
               bgGradient="linear(to-br, #228be6, #15aabf)"
               rounded="md"
               marginInline="auto"
-              position="absolute"
-              left={0}
-              right={0}
-              top="-1.5rem"
               boxShadow="lg"
             >
               {feature.icon}
@@ -74,7 +87,6 @@ const Slide = () => {
             <Text fontSize="md" mt={4}>
               {feature.content}
             </Text>
-            
           </Box>
         ))}
       </SimpleGrid>

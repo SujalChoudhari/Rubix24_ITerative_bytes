@@ -60,7 +60,7 @@ const ItemCard = ({ fruit, index }) => {
       </Box>
       <Stack direction="row" justifyContent={"space-between"} alignItems="center" mb={2}>
         <Text
-          color={'teal.500'}
+          color={'blue.500'}
           textTransform={'uppercase'}
           fontWeight={800}
           fontSize={'lg'}
