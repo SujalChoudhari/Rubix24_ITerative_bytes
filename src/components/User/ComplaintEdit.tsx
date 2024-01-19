@@ -72,7 +72,30 @@ const CompliantEdit = ({ recordId }) => {
         fontSize: 'sm',
     }
 
-    const mailtoLink = `mailto:mockcourt@sujal.xyz?subject=Consumer%20Court%20Complaint&body=Username:%20${formData.username}%0D%0A%0D%0ADescription:%20${formData.description}%0D%0A%0D%0AStatus:%20${formData.status}%0D%0A%0D%0AAddress:%20${formData.address}%0D%0A%0D%0AOrder%20ID:%20${formData.orderId}%0D%0A%0D%0AComplaint%20Type:%20${formData.complaintType}`;
+    const recipientEmail = 'mockcourt@sujal.xyz'; // Replace with the actual recipient's email
+
+    const generateMailtoLink = () => {
+        const subject = encodeURIComponent('Urgent: Filing a Consumer Court Complaint');
+        const body = encodeURIComponent(`
+      Dear Ma'am/Sir,
+
+      I trust this message reaches you in good health. I am writing to bring to your attention a matter of concern that requires immediate assistance. My username on your platform is ${formData.username}, and I find myself faced with an issue that demands resolution.
+      
+      The problem at hand is described as follows: ${formData.description}. Despite my efforts, the current status of the issue remains ${formData.status}. I believe it is crucial to escalate this matter to the Consumer Court to seek a fair and swift resolution.
+      
+      My address is ${formData.address.trim() ? formData.address : '[REDACTED]'}, and if applicable, the company name associated with this matter is ${formData.orderId}. This complaint falls under the category of ${formData.complaintType}.
+      
+      I kindly request your prompt attention to this matter and look forward to your assistance in resolving this issue.
+
+      Sincerely,
+      ${formData.username}
+      
+      Generated via Arzi ❤️
+      `);
+        return `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+    };
+
+    const mailtoLink = `mailto:?subject=Consumer%20Court%20Complaint&body=Username:%20${formData.username}%0D%0A%0D%0ADescription:%20${formData.description}%0D%0A%0D%0AStatus:%20${formData.status}%0D%0A%0D%0AAddress:%20${formData.address}%0D%0A%0D%0AOrder%20ID:%20${formData.orderId}%0D%0A%0D%0AComplaint%20Type:%20${formData.complaintType}`;
 
     return (
         <Flex direction="column" align="center" justify="center" minH="70vh">
@@ -165,7 +188,7 @@ const CompliantEdit = ({ recordId }) => {
                 }}>
                     Revert
                 </Button>
-                <Button colorScheme="teal" mr={4} variant={"ghost"} onClick={() => {
+                <Button colorScheme="teal" mr={4} ml={4} variant={"outline"} onClick={() => {
                     handleUpdateRecord(); toast({
                         title: 'Saved Successfully.',
                         description: "We've saved the data",
@@ -176,8 +199,8 @@ const CompliantEdit = ({ recordId }) => {
                 }}>
                     Update Complaint
                 </Button>
-                <Button onClick={() => { window.open(mailtoLink, '_blank'); }}>
-                    Appeal Consumer Court
+                <Button colorScheme={"red"} variant={"ghost"} onClick={() => { window.open(generateMailtoLink(), '_blank'); }}>
+                    Not Satisfied
                 </Button>
             </Box>
         </Flex>
