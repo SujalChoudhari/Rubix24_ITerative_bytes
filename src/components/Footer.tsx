@@ -101,7 +101,7 @@ import {
           <Text fontSize="md">
             Built by{' '}
             <Link
-              href="https://github.com/MihirRajeshPanchal/Rubix24_ITerative_bytes.git"
+              href="https://github.com/SujalChoudhari/Rubix24_ITerative_bytes"
               textDecoration="underline"
               _hover={{ textDecoration: 'underline' }}
               isExternal
