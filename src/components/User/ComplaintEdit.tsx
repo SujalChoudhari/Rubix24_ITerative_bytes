@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ChakraProvider, useToast, Flex, Heading, Input, Button, ColorModeScript, useColorMode, FormControl, FormHelperText, FormLabel, Box, useBoolean, Select, Progress, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Textarea } from '@chakra-ui/react';
+import { ChakraProvider, useToast, Flex, Heading, Input, Button, ColorModeScript, useColorMode, FormControl, FormHelperText, FormLabel, Box, useBoolean, Select, Progress, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Textarea, Link } from '@chakra-ui/react';
 import PocketBase from 'pocketbase';
 import { Navigate, useNavigate } from 'react-router';
+import * as rrd from 'react-router-dom'
 
 const pb = new PocketBase('http://127.0.0.1:8090');
 
@@ -13,6 +14,7 @@ const CompliantEdit = ({ recordId }) => {
         address: '',
         orderId: '',
         complaintType: '',
+        receipt:''
     });
 
     const { colorMode, toggleColorMode } = useColorMode();
@@ -86,10 +88,11 @@ const CompliantEdit = ({ recordId }) => {
       My address is ${formData.address.trim() ? formData.address : '[REDACTED]'}, and if applicable, the company name associated with this matter is ${formData.orderId}. This complaint falls under the category of ${formData.complaintType}.
       
       I kindly request your prompt attention to this matter and look forward to your assistance in resolving this issue.
-
       Sincerely,
       ${formData.username}
       
+
+      Attached Receipt: http://127.0.0.1:8090/api/files/complaints/${recordId}/${formData.receipt}
       Generated via Arzi ❤️
       `);
         return `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
@@ -137,6 +140,17 @@ const CompliantEdit = ({ recordId }) => {
                     <FormHelperText>Description cannot be changed</FormHelperText>
                 </Box>
                 <Textarea placeholder="Enter description" name="description" value={formData.description} onChange={handleInputChange} />
+            </FormControl>
+
+            <FormControl mb={5} mt={5} color={"blue"}>
+                <Box display={'inline-block'}>
+                    <Button colorScheme='blue' variant={"ghost"}>
+                        <rrd.Link to={`http://127.0.0.1:8090/api/files/complaints/${recordId}/${formData.receipt}`}>
+                            <Link>Download Receipt</Link>
+                        </rrd.Link>
+                    </Button>
+                </Box>
+
             </FormControl>
 
             <FormControl mb={3}>

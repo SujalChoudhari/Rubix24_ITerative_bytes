@@ -42,7 +42,7 @@ const Slide = () => {
       >
         <Button
           as={Link}
-          href="#"
+          href="/signup"
           color="white"
           variant="solid"
           size="lg"
@@ -56,7 +56,7 @@ const Slide = () => {
         </Button>
         <Button
           as={Link}
-          href="#"
+          href="/videoCall"
           size="lg"
           rounded="md"
           mb={{ base: 2, sm: 0 }}
